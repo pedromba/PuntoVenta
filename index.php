@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Punto de Venta - Login & Registro</title>
+    <title>PuntoVenta - Login & Registro</title>
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,31 +13,31 @@
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts - Sora -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- CSS Personalizado -->
     <link rel="stylesheet" href="./recursos/css/estilosLogin.css">
 </head>
 <body>
     <div class="container-fluid login-container">
-        <div class="row h-100">
+        <div class="row">
             <!-- Columna Izquierda - Información y Branding -->
-            <div class="col-lg-6 col-md-12 info-section d-flex flex-column justify-content-center">
+            <div class="col-lg-6 col-md-12 info-section">
                 <div class="info-content observe-fade">
                     <!-- Logo -->
-                    <div class="logo-section mb-5">
+                    <div class="logo-section">
                         <div class="logo-icon">
                             <i class="fas fa-shopping-cart"></i>
                         </div>
-                        <h1 class="brand-title">Punto de Venta</h1>
+                        <h1 class="brand-title">PuntoVenta</h1>
                         <p class="brand-subtitle">Sistema Integral de Gestión Comercial</p>
                     </div>
 
                     <!-- Descripción -->
-                    <div class="description-section mb-5">
+                    <div class="description-section">
                         <h3 class="section-title">Bienvenido a tu solución comercial</h3>
                         <p class="section-text">
                             Gestiona tu negocio de forma eficiente con nuestro sistema de punto de venta integral. 
@@ -46,45 +46,37 @@
                     </div>
 
                     <!-- Características -->
-                    <div class="features-grid mb-4">
+                    <div class="features-grid">
                         <div class="feature-card observe-fade">
                             <div class="feature-icon">
                                 <i class="fas fa-chart-pie"></i>
                             </div>
-                            <div class="feature-text">
-                                <h5>Reportes Avanzados</h5>
-                                <p>Analiza tus ventas con gráficos y estadísticas en tiempo real</p>
-                            </div>
+                            <h5>Reportes Avanzados</h5>
+                            <p>Analiza tus ventas con gráficos y estadísticas en tiempo real</p>
                         </div>
 
                         <div class="feature-card observe-fade">
                             <div class="feature-icon">
                                 <i class="fas fa-box-open"></i>
                             </div>
-                            <div class="feature-text">
-                                <h5>Control de Inventario</h5>
-                                <p>Gestiona tu stock y recibe alertas de productos bajos</p>
-                            </div>
+                            <h5>Control de Inventario</h5>
+                            <p>Gestiona tu stock y recibe alertas de productos bajos</p>
                         </div>
 
                         <div class="feature-card observe-fade">
                             <div class="feature-icon">
                                 <i class="fas fa-users-cog"></i>
                             </div>
-                            <div class="feature-text">
-                                <h5>Gestión de Usuarios</h5>
-                                <p>Control total de permisos y roles de acceso</p>
-                            </div>
+                            <h5>Gestión de Usuarios</h5>
+                            <p>Control total de permisos y roles de acceso</p>
                         </div>
 
                         <div class="feature-card observe-fade">
                             <div class="feature-icon">
                                 <i class="fas fa-lock-open"></i>
                             </div>
-                            <div class="feature-text">
-                                <h5>Seguridad Certificada</h5>
-                                <p>Encriptación avanzada y autenticación segura</p>
-                            </div>
+                            <h5>Seguridad Certificada</h5>
+                            <p>Encriptación avanzada y autenticación segura</p>
                         </div>
                     </div>
 
@@ -107,12 +99,12 @@
             </div>
 
             <!-- Columna Derecha - Formularios -->
-            <div class="col-lg-6 col-md-12 login-section d-flex align-items-center justify-content-center">
+            <div class="col-lg-6 col-md-12 login-section">
                 <div class="login-wrapper observe-fade">
                     <!-- Card del Formulario -->
                     <div class="login-card">
                         <!-- Tabs Navigation -->
-                        <ul class="nav nav-pills form-tabs mb-4" role="tablist">
+                        <ul class="nav nav-pills form-tabs" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button 
                                     class="nav-link active" 
@@ -144,8 +136,8 @@
                             <!-- LOGIN TAB -->
                             <div class="tab-pane fade show active" id="content-login" role="tabpanel">
                                 <!-- Header -->
-                                <div class="login-header text-center mb-4">
-                                    <div class="login-icon mb-3">
+                                <div class="login-header">
+                                    <div class="login-icon">
                                         <i class="fas fa-sign-in-alt"></i>
                                     </div>
                                     <h2>Iniciar Sesión</h2>
@@ -156,10 +148,7 @@
                                 <div id="alertContainer" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-exclamation-circle me-2"></i>
-                                        <div>
-                                            <strong>Error de autenticación</strong>
-                                            <p id="alertMessage" class="mb-0"></p>
-                                        </div>
+                                        <span id="errorMessage"></span>
                                     </div>
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                                 </div>
@@ -167,85 +156,75 @@
                                 <!-- Formulario de Login -->
                                 <form id="loginForm" action="config/process_login.php" method="POST" class="needs-validation" novalidate>
                                     <!-- Email Input -->
-                                    <div class="form-group mb-4">
-                                        <label for="email" class="form-label">
+                                    <div class="form-group">
+                                        <label class="form-label" for="email">
                                             <i class="fas fa-envelope me-2"></i>Correo Electrónico
                                         </label>
                                         <input 
                                             type="email" 
-                                            class="form-control form-control-lg" 
+                                            class="form-control" 
                                             id="email" 
                                             name="email" 
-                                            placeholder="ejemplo@correo.com"
+                                            placeholder="tu@empresa.com" 
                                             required
-                                            autocomplete="email"
                                         >
-                                        <div class="invalid-feedback d-block">
-                                            <i class="fas fa-times-circle me-1"></i>Por favor ingresa un email válido
-                                        </div>
+                                        <div class="invalid-feedback">Por favor ingresa un correo válido</div>
                                     </div>
 
                                     <!-- Password Input -->
-                                    <div class="form-group mb-2">
-                                        <label for="password" class="form-label">
+                                    <div class="form-group">
+                                        <label class="form-label" for="password">
                                             <i class="fas fa-lock me-2"></i>Contraseña
                                         </label>
                                         <div class="password-input-group">
                                             <input 
                                                 type="password" 
-                                                class="form-control form-control-lg" 
+                                                class="form-control" 
                                                 id="password" 
                                                 name="password" 
-                                                placeholder="Tu contraseña"
+                                                placeholder="••••••••" 
                                                 required
-                                                autocomplete="current-password"
+                                                minlength="6"
                                             >
-                                            <button 
-                                                type="button" 
-                                                class="btn-toggle-password"
-                                                id="togglePassword"
-                                                title="Mostrar/Ocultar contraseña"
-                                            >
+                                            <button type="button" class="btn-toggle-password" id="togglePassword">
                                                 <i class="fas fa-eye"></i>
                                             </button>
                                         </div>
-                                        <div class="invalid-feedback d-block">
-                                            <i class="fas fa-times-circle me-1"></i>Por favor ingresa tu contraseña
-                                        </div>
+                                        <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres</div>
                                     </div>
 
                                     <!-- Forgot Password -->
-                                    <div class="mb-4">
+                                    <div class="text-end mb-3">
                                         <a href="#" class="link-forgot-password">
-                                            <i class="fas fa-question-circle me-1"></i>¿Olvidaste tu contraseña?
+                                            <i class="fas fa-key me-1"></i>¿Olvidaste tu contraseña?
                                         </a>
                                     </div>
 
                                     <!-- Remember Me -->
-                                    <div class="form-check mb-4 remember-check">
+                                    <div class="form-check remember-check">
                                         <input 
-                                            class="form-check-input" 
                                             type="checkbox" 
+                                            class="form-check-input" 
                                             id="rememberMe" 
                                             name="rememberMe"
                                         >
                                         <label class="form-check-label" for="rememberMe">
-                                            Recuerda mis credenciales
+                                            Recuérdame en este dispositivo
                                         </label>
                                     </div>
 
                                     <!-- Submit Button -->
                                     <button 
                                         type="submit" 
-                                        class="btn btn-primary btn-lg w-100 btn-submit mb-3"
+                                        class="btn btn-submit btn-lg w-100"
                                         id="submitBtn"
                                     >
                                         <span class="btn-text">
-                                            <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
+                                            <i class="fas fa-sign-in-alt me-2"></i>Acceder
                                         </span>
                                         <span class="btn-loading d-none">
-                                            <span class="spinner-border spinner-border-sm me-2"></span>
-                                            Autenticando...
+                                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                            Iniciando sesión...
                                         </span>
                                     </button>
                                 </form>
@@ -254,8 +233,8 @@
                             <!-- REGISTER TAB -->
                             <div class="tab-pane fade" id="content-register" role="tabpanel">
                                 <!-- Header -->
-                                <div class="login-header text-center mb-4">
-                                    <div class="login-icon mb-3" style="background: linear-gradient(135deg, #66bb6a 0%, #42a74d 100%);">
+                                <div class="login-header">
+                                    <div class="login-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
                                         <i class="fas fa-building"></i>
                                     </div>
                                     <h2>Crear Nueva Empresa</h2>
@@ -266,10 +245,7 @@
                                 <div id="alertContainerRegister" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-exclamation-circle me-2"></i>
-                                        <div>
-                                            <strong>Error en el registro</strong>
-                                            <p id="alertMessageRegister" class="mb-0"></p>
-                                        </div>
+                                        <span id="errorMessageRegister"></span>
                                     </div>
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                                 </div>
@@ -277,54 +253,57 @@
                                 <!-- Formulario de Registro -->
                                 <form id="registerForm" action="config/process_register.php" method="POST" class="needs-validation" novalidate>
                                     <!-- Nombre Comercial -->
-                                    <div class="form-group mb-3">
-                                        <label for="company-name" class="form-label">
+                                    <div class="form-group">
+                                        <label class="form-label" for="company-name">
                                             <i class="fas fa-store me-2"></i>Nombre Comercial
                                         </label>
                                         <input 
                                             type="text" 
-                                            class="form-control" 
+                                            class="form-control register-input" 
                                             id="company-name" 
-                                            name="company_name" 
-                                            placeholder="Ej: Mi Tienda S.A."
+                                            name="companyName" 
+                                            placeholder="Ej: TechStore S.A." 
                                             required
                                         >
+                                        <div class="invalid-feedback">El nombre comercial es requerido</div>
                                     </div>
 
                                     <!-- NIF/CIF -->
-                                    <div class="form-group mb-3">
-                                        <label for="nif-cif" class="form-label">
+                                    <div class="form-group">
+                                        <label class="form-label" for="nif-cif">
                                             <i class="fas fa-id-card me-2"></i>NIF/CIF
                                         </label>
                                         <input 
                                             type="text" 
-                                            class="form-control" 
+                                            class="form-control register-input" 
                                             id="nif-cif" 
-                                            name="nif_cif" 
-                                            placeholder="Ej: 12345678A"
+                                            name="nifCif" 
+                                            placeholder="Ej: A12345678" 
                                             required
                                         >
+                                        <div class="invalid-feedback">El NIF/CIF es requerido</div>
                                     </div>
 
                                     <!-- Email Contacto -->
-                                    <div class="form-group mb-3">
-                                        <label for="contact-email" class="form-label">
-                                            <i class="fas fa-envelope me-2"></i>Email de Contacto
+                                    <div class="form-group">
+                                        <label class="form-label" for="contact-email">
+                                            <i class="fas fa-envelope me-2"></i>Correo de Contacto
                                         </label>
                                         <input 
                                             type="email" 
-                                            class="form-control" 
+                                            class="form-control register-input" 
                                             id="contact-email" 
-                                            name="contact_email" 
-                                            placeholder="contacto@empresa.com"
+                                            name="contactEmail" 
+                                            placeholder="contacto@empresa.com" 
                                             required
                                         >
+                                        <div class="invalid-feedback">Ingresa un correo válido</div>
                                     </div>
 
                                     <!-- Teléfono -->
-                                    <div class="form-group mb-3">
-                                        <label for="phone" class="form-label">
-                                            <i class="fas fa-phone me-2"></i>Teléfono
+                                    <div class="form-group">
+                                        <label class="form-label" for="phone">
+                                            <i class="fas fa-phone me-2"></i>Teléfono (Opcional)
                                         </label>
                                         <input 
                                             type="tel" 
@@ -332,71 +311,75 @@
                                             id="phone" 
                                             name="phone" 
                                             placeholder="+240 222 123456"
-                                            pattern="\+240\s(222|555)\s\d{6}"
-                                            title="Formato: +240 222/555 seguido de 6 dígitos (Ej: +240 222 123456)"
                                         >
-                                        <small class="text-muted d-block mt-1">
-                                            <i class="fas fa-info-circle me-1"></i>Formato: +240 222 o 555, luego 6 dígitos
+                                        <small class="text-muted">
+                                            <i class="fas fa-info-circle me-1"></i>Formato: +240 222/555 XXXXXX
                                         </small>
                                     </div>
 
                                     <!-- Categoría Negocio -->
-                                    <div class="form-group mb-3">
-                                        <label for="category" class="form-label">
-                                            <i class="fas fa-tag me-2"></i>Tipo de Negocio
+                                    <div class="form-group">
+                                        <label class="form-label" for="category">
+                                            <i class="fas fa-layer-group me-2"></i>Categoría de Negocio
                                         </label>
-                                        <select class="form-select" id="category" name="category" required>
+                                        <select 
+                                            class="form-select register-input" 
+                                            id="category" 
+                                            name="category" 
+                                            required
+                                        >
                                             <option value="">Selecciona una categoría</option>
-                                            <option value="Alimentos">🍎 Alimentos</option>
-                                            <option value="Moda">👕 Moda y Ropa</option>
-                                            <option value="Electronica">💻 Electrónica</option>
-                                            <option value="Ferreteria">🔨 Ferretería</option>
-                                            <option value="Libros">📚 Libros</option>
-                                            <option value="Farmacia">💊 Farmacia</option>
-                                            <option value="Clinica">🏥 Clínica</option>
-                                            <option value="Vehiculos">🚗 Vehículos</option>
+                                            <option value="retail">Retail/Tienda</option>
+                                            <option value="restaurant">Restaurante/Bar</option>
+                                            <option value="pharmacy">Farmacia</option>
+                                            <option value="supermarket">Supermercado</option>
+                                            <option value="other">Otra</option>
                                         </select>
+                                        <div class="invalid-feedback">Selecciona una categoría</div>
                                     </div>
 
                                     <!-- Alert Info -->
-                                    <div class="alert alert-info alert-dismissible fade show mb-4" role="alert">
+                                    <div class="alert alert-info alert-dismissible fade show mb-3" role="alert">
                                         <div class="d-flex align-items-start">
-                                            <i class="fas fa-info-circle me-2 mt-1"></i>
+                                            <i class="fas fa-lightbulb me-3 mt-1"></i>
                                             <div>
-                                                <strong>Seguridad de tu cuenta</strong>
+                                                <strong>Información Importante:</strong>
                                                 <p class="mb-0 mt-1 small">
-                                                    Una contraseña segura y aleatoria será generada y enviada a tu correo electrónico. 
-                                                    Podrás cambiarla después de iniciar sesión.
+                                                    Se enviará un correo de confirmación a la dirección ingresada. 
+                                                    El registro estará completo después de verificar tu correo.
                                                 </p>
                                             </div>
                                         </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                                     </div>
 
                                     <!-- Terms -->
-                                    <div class="form-check mb-4">
+                                    <div class="form-check mb-3">
                                         <input 
-                                            class="form-check-input" 
                                             type="checkbox" 
+                                            class="form-check-input" 
                                             id="terms" 
                                             name="terms" 
                                             required
                                         >
                                         <label class="form-check-label" for="terms">
-                                            Acepto los <a href="#" class="link-help">términos y condiciones</a>
+                                            Acepto los <a href="#" class="link-forgot-password">términos de servicio</a> 
+                                            y la <a href="#" class="link-forgot-password">política de privacidad</a>
                                         </label>
+                                        <div class="invalid-feedback">Debes aceptar los términos y condiciones</div>
                                     </div>
 
                                     <!-- Submit Button -->
                                     <button 
                                         type="submit" 
-                                        class="btn btn-success btn-lg w-100 btn-submit"
+                                        class="btn btn-submit btn-success btn-lg w-100"
                                         id="submitBtnRegister"
                                     >
                                         <span class="btn-text">
-                                            <i class="fas fa-plus-circle me-2"></i>Crear Empresa
+                                            <i class="fas fa-check-circle me-2"></i>Registrar Empresa
                                         </span>
                                         <span class="btn-loading d-none">
-                                            <span class="spinner-border spinner-border-sm me-2"></span>
+                                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
                                             Registrando...
                                         </span>
                                     </button>
@@ -406,10 +389,18 @@
                     </div>
 
                     <!-- Footer Link -->
-                    <p class="login-footer text-center mt-4">
-                        <a href="#" class="link-help">Centro de ayuda</a> · 
-                        <a href="#" class="link-help">Términos de servicio</a> · 
-                        <a href="#" class="link-help">Privacidad</a>
+                    <p class="login-footer mt-4">
+                        <a href="#" class="link-help">
+                            <i class="fas fa-headset me-1"></i>Centro de ayuda
+                        </a>
+                        <span class="text-muted">·</span>
+                        <a href="#" class="link-help">
+                            <i class="fas fa-file-contract me-1"></i>Términos
+                        </a>
+                        <span class="text-muted">·</span>
+                        <a href="#" class="link-help">
+                            <i class="fas fa-shield-alt me-1"></i>Privacidad
+                        </a>
                     </p>
                 </div>
             </div>
