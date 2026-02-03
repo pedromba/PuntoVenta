@@ -1,0 +1,521 @@
+/* ============ EMPRESAS PAGE STYLES ============ */
+
+/* Filters Section */
+.filters-section {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow-sm);
+}
+
+.filters-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.filter-group {
+    position: relative;
+}
+
+.form-select {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    background: white;
+    transition: var(--transition);
+    font-family: 'Sora', sans-serif;
+}
+
+.form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+    outline: none;
+}
+
+.form-select:hover {
+    border-color: var(--primary);
+}
+
+.btn-outline-secondary {
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.btn-outline-secondary:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.filter-results {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.filter-results p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.filter-results p strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Empresas Grid */
+.empresas-grid {
+    margin-bottom: 40px;
+}
+
+.empresa-card {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: var(--shadow-sm);
+}
+
+.empresa-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+}
+
+.empresa-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid var(--border-light);
+    background: var(--bg-secondary);
+}
+
+.empresa-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+.empresa-status.activo {
+    background: var(--success-light);
+    color: var(--success);
+}
+
+.empresa-status.inactivo {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.empresa-status.suspendido {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.status-text {
+    font-weight: 600;
+}
+
+.dropdown-toggle {
+    color: var(--text-secondary) !important;
+}
+
+.dropdown-toggle:hover {
+    color: var(--primary) !important;
+}
+
+/* Logo Section */
+.empresa-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 16px 24px;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+}
+
+.logo-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary) 0%, #0ea5e9 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+/* Empresa Info */
+.empresa-info {
+    padding: 20px 16px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.empresa-nombre {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.empresa-nif {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-bottom: 10px;
+}
+
+.empresa-categoria {
+    display: flex;
+    justify-content: center;
+}
+
+.badge-category {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* Empresa Stats */
+.empresa-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.stat {
+    background: white;
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.stat-label {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* Contact Info */
+.empresa-contact {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 1px solid var(--border-light);
+    background: var(--bg-secondary);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.contact-item i {
+    width: 16px;
+    text-align: center;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+/* Empresa Actions */
+.empresa-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+}
+
+.empresa-actions .btn {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 12px;
+    transition: var(--transition);
+}
+
+.empresa-actions .btn-primary {
+    background: var(--primary);
+    border: none;
+}
+
+.empresa-actions .btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.empresa-actions .btn-outline-secondary {
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.empresa-actions .btn-outline-secondary:hover {
+    background: var(--primary-light);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Pagination */
+.pagination-section {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+    padding: 20px;
+}
+
+.pagination {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.page-item {
+    list-style: none;
+}
+
+.page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.page-link:hover:not(.disabled) {
+    background: var(--primary-light);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.page-item.active .page-link {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.page-item.disabled .page-link {
+    color: var(--text-tertiary);
+    cursor: not-allowed;
+    background: var(--bg-tertiary);
+}
+
+/* Animations */
+[data-animate="slide-in"] {
+    animation: slideInUp 0.6s ease-out forwards;
+}
+
+[data-animate="slide-in"]:nth-child(1) { animation-delay: 0.1s; }
+[data-animate="slide-in"]:nth-child(2) { animation-delay: 0.15s; }
+[data-animate="slide-in"]:nth-child(3) { animation-delay: 0.2s; }
+[data-animate="slide-in"]:nth-child(4) { animation-delay: 0.25s; }
+[data-animate="slide-in"]:nth-child(5) { animation-delay: 0.3s; }
+[data-animate="slide-in"]:nth-child(6) { animation-delay: 0.35s; }
+[data-animate="slide-in"]:nth-child(7) { animation-delay: 0.4s; }
+[data-animate="slide-in"]:nth-child(8) { animation-delay: 0.45s; }
+[data-animate="slide-in"]:nth-child(9) { animation-delay: 0.5s; }
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .filters-container {
+        grid-template-columns: 1fr;
+    }
+
+    .empresa-card {
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .filters-section {
+        padding: 16px;
+    }
+
+    .filters-container {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .filter-results {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    .empresa-logo {
+        padding: 24px 16px 16px;
+    }
+
+    .logo-placeholder {
+        width: 64px;
+        height: 64px;
+        font-size: 24px;
+    }
+
+    .empresa-nombre {
+        font-size: 14px;
+    }
+
+    .stat-value {
+        font-size: 16px;
+    }
+
+    .empresa-actions {
+        gap: 8px;
+    }
+
+    .empresa-actions .btn {
+        padding: 7px 10px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-header {
+        padding: 20px 12px;
+    }
+
+    .page-title {
+        font-size: 20px;
+    }
+
+    .header-content {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .btn-primary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .filters-section {
+        padding: 12px;
+        margin-bottom: 20px;
+    }
+
+    .filter-group {
+        margin-bottom: 8px;
+    }
+
+    .form-select {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .empresa-header {
+        padding: 12px;
+    }
+
+    .empresa-logo {
+        padding: 16px;
+    }
+
+    .empresa-info {
+        padding: 12px;
+    }
+
+    .empresa-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .stat {
+        padding: 12px;
+    }
+
+    .stat-value {
+        font-size: 16px;
+    }
+
+    .empresa-contact {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .contact-item {
+        font-size: 11px;
+    }
+
+    .empresa-actions {
+        padding: 12px;
+    }
+
+    .pagination-section {
+        padding: 12px;
+        margin: 24px 0;
+    }
+
+    .pagination {
+        gap: 6px;
+    }
+
+    .page-link {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+}
