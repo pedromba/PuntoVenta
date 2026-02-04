@@ -1,0 +1,201 @@
+/* ============================================
+   PRODUCTOS - Estilos Específicos
+   ============================================ */
+
+.productos-container {
+    animation: slideInUp 0.3s ease-out;
+}
+
+/* Tabla de Productos */
+.table-modern.productos-table {
+    margin-top: 10px;
+}
+
+.table-modern.productos-table thead th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 16px;
+}
+
+.table-modern.productos-table tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+}
+
+.table-modern.productos-table tbody tr:hover {
+    background: #f9fafb;
+    transform: scale(1.001);
+}
+
+/* Status Badges */
+.badge-stock-optimo {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-stock-bajo {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-stock-agotado {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Formulario Modal Producto */
+.modal-header-custom {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+}
+
+.modal-header-custom .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Input Icons */
+.input-group .input-group-text {
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    color: #6b7280;
+}
+
+/* Validación */
+.is-valid ~ .valid-feedback,
+.is-invalid ~ .invalid-feedback {
+    display: block;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+/* Acciones Fila */
+.action-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.btn-action {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    background: white;
+    color: #6b7280;
+    transition: all 0.2s ease;
+}
+
+.btn-action:hover {
+    background: #f3f4f6;
+    color: #667eea;
+    border-color: #667eea;
+}
+
+.btn-action.delete:hover {
+    background: #fee2e2;
+    color: #ef4444;
+    border-color: #ef4444;
+}
+
+/* Animaciones */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loader */
+.loader-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #e5e7eb;
+    border-radius: 50%;
+    border-top-color: #667eea;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Filtros Responsivos */
+.filters-section .form-control,
+.filters-section .form-select {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+}
+
+/* Stats Cards */
+.header-stats {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.stat-badge {
+    background: #f3f4f6;
+    color: #374151;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.stat-badge.active {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .table-modern {
+        font-size: 13px;
+    }
+
+    .table-modern thead th,
+    .table-modern tbody td {
+        padding: 12px;
+    }
+
+    .action-buttons {
+        gap: 4px;
+    }
+
+    .btn-action {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+}

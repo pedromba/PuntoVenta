@@ -1,0 +1,306 @@
+/* ============================================
+   USUARIOS - Estilos Específicos
+   ============================================ */
+
+.usuarios-container {
+    animation: slideInUp 0.3s ease-out;
+}
+
+/* Stats Cards Usuarios */
+.stats-grid .stat-card.total-usuarios {
+    border-left: 4px solid #667eea;
+}
+
+.stats-grid .stat-card.total-usuarios .stat-icon {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.stats-grid .stat-card.usuarios-activos {
+    border-left: 4px solid #10b981;
+}
+
+.stats-grid .stat-card.usuarios-activos .stat-icon {
+    background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+.stats-grid .stat-card.usuarios-inactivos {
+    border-left: 4px solid #ef4444;
+}
+
+.stats-grid .stat-card.usuarios-inactivos .stat-icon {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+.stats-grid .stat-card.admin-usuarios {
+    border-left: 4px solid #f59e0b;
+}
+
+.stats-grid .stat-card.admin-usuarios .stat-icon {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+/* Tabla Usuarios */
+.table-modern.usuarios-table thead th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 16px;
+}
+
+.table-modern.usuarios-table tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table-modern.usuarios-table tbody tr:hover {
+    background: #f9f5ff;
+}
+
+/* Usuario Card */
+.usuario-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.usuario-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.usuario-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.usuario-nombre {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 14px;
+}
+
+.usuario-email {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* Rol */
+.role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.role-badge.superadmin {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.role-badge.admin {
+    background: #fed7aa;
+    color: #9a3412;
+}
+
+.role-badge.finanzas {
+    background: #bfdbfe;
+    color: #1e40af;
+}
+
+.role-badge.almacen {
+    background: #c7d2fe;
+    color: #312e81;
+}
+
+.role-badge.vendedor {
+    background: #d1fae5;
+    color: #047857;
+}
+
+/* Estado Usuario */
+.usuario-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.usuario-status.activo {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.usuario-status.activo i {
+    color: #10b981;
+}
+
+.usuario-status.inactivo {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.usuario-status.inactivo i {
+    color: #ef4444;
+}
+
+/* Último Acceso */
+.ultimo-acceso {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.ultimo-acceso.nunca {
+    color: #ef4444;
+    font-weight: 600;
+}
+
+/* Filtros */
+.filter-section .filter-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.filter-section .filter-group select {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+}
+
+/* Modal Usuario */
+.modal-header-custom.usuarios {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* Form Usuario */
+.form-usuario .form-group {
+    margin-bottom: 16px;
+}
+
+.form-usuario .form-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.form-usuario .form-control,
+.form-usuario .form-select {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.form-usuario .form-control:focus,
+.form-usuario .form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Password Strength */
+.password-strength {
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    margin-top: 6px;
+    overflow: hidden;
+}
+
+.password-strength-bar {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.password-strength-bar.weak {
+    background: #ef4444;
+    width: 33%;
+}
+
+.password-strength-bar.medium {
+    background: #f59e0b;
+    width: 66%;
+}
+
+.password-strength-bar.strong {
+    background: #10b981;
+    width: 100%;
+}
+
+/* Permisos Checklist */
+.permission-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.permission-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.permission-item input[type="checkbox"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    accent-color: #667eea;
+}
+
+.permission-item label {
+    cursor: pointer;
+    margin: 0;
+    font-weight: 500;
+    color: #374151;
+}
+
+/* Animaciones */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .table-modern.usuarios-table {
+        font-size: 12px;
+    }
+
+    .usuario-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .permission-list {
+        grid-template-columns: 1fr;
+    }
+}

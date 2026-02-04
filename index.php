@@ -251,9 +251,35 @@
                                 </div>
 
                                 <!-- Formulario de Registro -->
-                                <form id="registerForm" action="config/process_register.php" method="POST" class="needs-validation register-form" novalidate>
-                                    <!-- Fila 1: Nombre
-                                      Comercial y NIF/CIF -->
+                                <form id="registerForm" action="config/process_register.php" method="POST" class="needs-validation register-form" enctype="multipart/form-data" novalidate>
+                                    <!-- Sección Logo de Empresa -->
+                                    <div class="logo-upload-section">
+                                        <div class="logo-upload-container">
+                                            <input 
+                                                type="file" 
+                                                id="logo-input" 
+                                                name="companyLogo" 
+                                                class="logo-file-input" 
+                                                accept="image/*"
+                                                style="display: none;"
+                                            >
+                                            <label for="logo-input" class="logo-upload-label">
+                                                <div class="logo-preview" id="logoPreview">
+                                                    <div class="logo-placeholder">
+                                                        <i class="fas fa-image"></i>
+                                                        <span>Logo de Empresa</span>
+                                                    </div>
+                                                </div>
+                                                <div class="logo-upload-hint">
+                                                    <i class="fas fa-cloud-upload-alt"></i>
+                                                    <span>Haz clic o arrastra tu logo aquí</span>
+                                                </div>
+                                            </label>
+                                            <div class="logo-file-name" id="logoFileName"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Fila 1: Nombre Comercial y NIF/CIF -->
                                     <div class="form-row">
                                         <div class="form-group form-group-half">
                                             <label class="form-label" for="company-name">
@@ -339,19 +365,26 @@
                                     </div>
 
                                     <!-- Términos y Condiciones -->
-                                    <div class="form-check register-terms">
-                                        <input 
-                                            type="checkbox" 
-                                            class="form-check-input" 
-                                            id="terms" 
-                                            name="terms" 
-                                            required
-                                        >
-                                        <label class="form-check-label" for="terms">
-                                            Acepto los <a href="#" class="link-forgot-password">términos de servicio</a> 
-                                            y la <a href="#" class="link-forgot-password">política de privacidad</a>
-                                        </label>
-                                        <div class="invalid-feedback d-block">Debes aceptar los términos y condiciones</div>
+                                    <div class="register-terms-wrapper">
+                                        <div class="form-check register-terms">
+                                            <input 
+                                                type="checkbox" 
+                                                class="form-check-input" 
+                                                id="terms" 
+                                                name="terms" 
+                                                required
+                                            >
+                                            <label class="form-check-label" for="terms">
+                                                Acepto los 
+                                                <a href="#modalTerminos" data-bs-toggle="modal" class="link-terms">términos de servicio</a> 
+                                                y la 
+                                                <a href="#modalPrivacidad" data-bs-toggle="modal" class="link-terms">política de privacidad</a>
+                                            </label>
+                                        </div>
+                                        <div class="invalid-feedback register-terms-feedback">
+                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                            Debes aceptar los términos y condiciones
+                                        </div>
                                     </div>
 
                                     <!-- Submit Button -->

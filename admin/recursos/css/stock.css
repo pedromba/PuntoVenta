@@ -1,0 +1,209 @@
+/* ============================================
+   STOCK - Estilos Específicos
+   ============================================ */
+
+.stock-container {
+    animation: slideInUp 0.3s ease-out;
+}
+
+/* Stats Cards Stock */
+.stats-grid .stat-card.stock-total {
+    border-left: 4px solid #06b6d4;
+}
+
+.stats-grid .stat-card.stock-total .stat-icon {
+    background: linear-gradient(135deg, #06b6d4, #22d3ee);
+}
+
+.stats-grid .stat-card.bajo-stock {
+    border-left: 4px solid #f59e0b;
+}
+
+.stats-grid .stat-card.bajo-stock .stat-icon {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+.stats-grid .stat-card.sin-stock {
+    border-left: 4px solid #ef4444;
+}
+
+.stats-grid .stat-card.sin-stock .stat-icon {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+.stats-grid .stat-card.rotacion {
+    border-left: 4px solid #8b5cf6;
+}
+
+.stats-grid .stat-card.rotacion .stat-icon {
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+}
+
+/* Tabla Stock */
+.table-modern.stock-table thead th {
+    background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%);
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 16px;
+}
+
+.table-modern.stock-table tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table-modern.stock-table tbody tr:hover {
+    background: #ecf9ff;
+}
+
+/* Estado Stock */
+.stock-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.stock-status.optimo {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.stock-status.bajo {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.stock-status.agotado {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Cantidades */
+.stock-cantidad {
+    font-weight: 700;
+    color: #1f2937;
+    font-family: 'Courier New', monospace;
+}
+
+.stock-cantidad.alerta {
+    color: #ef4444;
+}
+
+.stock-minimo {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 600;
+}
+
+/* Valor Inventario */
+.inventory-value {
+    font-weight: 700;
+    color: #10b981;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+}
+
+/* Progress Bar Stock */
+.stock-progress {
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.stock-progress-bar {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.stock-progress-bar.optimo {
+    background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+.stock-progress-bar.bajo {
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+
+.stock-progress-bar.agotado {
+    background: linear-gradient(90deg, #ef4444, #f87171);
+}
+
+/* Filtros Estado */
+.filter-section .status-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-section .status-filter {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-section .status-filter input[type="radio"],
+.filter-section .status-filter input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.filter-section .status-filter label {
+    cursor: pointer;
+    margin: 0;
+    font-weight: 500;
+    color: #374151;
+}
+
+/* Botón Bajo Stock */
+.btn-bajo-stock {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-bajo-stock:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(245, 158, 11, 0.3);
+    color: white;
+}
+
+/* Modal Stock */
+.modal-header-custom.stock {
+    background: linear-gradient(135deg, #06b6d4, #22d3ee);
+}
+
+/* Animaciones */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .table-modern.stock-table {
+        font-size: 12px;
+    }
+
+    .filter-section .status-filters {
+        justify-content: space-between;
+    }
+}

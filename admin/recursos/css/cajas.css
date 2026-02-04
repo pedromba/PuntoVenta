@@ -1,0 +1,204 @@
+/* ============================================
+   CAJAS - Estilos Específicos
+   ============================================ */
+
+.cajas-container {
+    animation: slideInUp 0.3s ease-out;
+}
+
+/* Stats Cards Cajas */
+.stats-grid .stat-card.abiertas {
+    border-left: 4px solid #3b82f6;
+}
+
+.stats-grid .stat-card.abiertas .stat-icon {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+}
+
+.stats-grid .stat-card.cerradas {
+    border-left: 4px solid #6b7280;
+}
+
+.stats-grid .stat-card.cerradas .stat-icon {
+    background: linear-gradient(135deg, #6b7280, #9ca3af);
+}
+
+.stats-grid .stat-card.correctas {
+    border-left: 4px solid #10b981;
+}
+
+.stats-grid .stat-card.correctas .stat-icon {
+    background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+.stats-grid .stat-card.diferencias {
+    border-left: 4px solid #ef4444;
+}
+
+.stats-grid .stat-card.diferencias .stat-icon {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+/* Tabla Cajas */
+.table-modern.cajas-table thead th {
+    background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 16px;
+}
+
+.table-modern.cajas-table tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table-modern.cajas-table tbody tr:hover {
+    background: #f0f9ff;
+}
+
+/* Estado Caja */
+.caja-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.caja-status.abierta {
+    background: #dbeafe;
+    color: #0c4a6e;
+}
+
+.caja-status.cerrada {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+/* Montos */
+.monto-display {
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    color: #1f2937;
+    font-size: 14px;
+}
+
+.monto-diferencia {
+    font-weight: 700;
+}
+
+.monto-diferencia.positiva {
+    color: #10b981;
+}
+
+.monto-diferencia.negativa {
+    color: #ef4444;
+}
+
+/* Diferencia Arqueo */
+.arqueo-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.arqueo-indicator.correcto {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.arqueo-indicator.diferencia {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Botón Abrir Caja */
+.btn-abrir-caja {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-abrir-caja:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+    color: white;
+}
+
+.btn-abrir-caja:active {
+    transform: translateY(0);
+}
+
+/* Modal Caja */
+.modal-header-custom.cajas {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+}
+
+/* Detalles */
+.caja-details {
+    background: #f0f9ff;
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 4px solid #3b82f6;
+    margin-bottom: 16px;
+}
+
+.caja-details .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #e0f2fe;
+}
+
+.caja-details .detail-row:last-child {
+    border-bottom: none;
+}
+
+.caja-details .detail-label {
+    font-weight: 600;
+    color: #374151;
+}
+
+.caja-details .detail-value {
+    font-weight: 700;
+    color: #1f2937;
+    font-family: 'Courier New', monospace;
+}
+
+/* Animaciones */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .table-modern.cajas-table {
+        font-size: 12px;
+    }
+
+    .caja-details .detail-row {
+        flex-direction: column;
+        gap: 4px;
+    }
+}

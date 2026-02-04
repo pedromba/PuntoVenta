@@ -1,0 +1,93 @@
+/* ============================================
+   MARCAS - Estilos Específicos
+   ============================================ */
+
+.marcas-container {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.table-modern.marcas-table thead th {
+    background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 16px;
+}
+
+.table-modern.marcas-table tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+}
+
+.table-modern.marcas-table tbody tr:hover {
+    background: #faf5ff;
+}
+
+/* Contadores */
+.product-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ede9fe;
+    color: #7c3aed;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.product-count i {
+    font-size: 14px;
+}
+
+/* Modal Marca */
+.modal-header-custom.marcas {
+    background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+}
+
+/* Stats Marcas */
+.stat-card.marca {
+    border-left: 4px solid #8b5cf6;
+}
+
+.stat-card.marca .stat-icon {
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Estados */
+.marca-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.marca-status.activa {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.marca-status.inactiva {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .table-modern.marcas-table {
+        font-size: 13px;
+    }
+}

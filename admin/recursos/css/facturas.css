@@ -1,0 +1,220 @@
+/* ============================================
+   FACTURAS - Estilos Específicos
+   ============================================ */
+
+.facturas-container {
+    animation: slideInUp 0.3s ease-out;
+}
+
+/* Stats Cards Facturas */
+.stats-grid .stat-card.total-facturas {
+    border-left: 4px solid #8b5cf6;
+}
+
+.stats-grid .stat-card.total-facturas .stat-icon {
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+}
+
+.stats-grid .stat-card.emitidas-hoy {
+    border-left: 4px solid #06b6d4;
+}
+
+.stats-grid .stat-card.emitidas-hoy .stat-icon {
+    background: linear-gradient(135deg, #06b6d4, #22d3ee);
+}
+
+.stats-grid .stat-card.ingresos-fiscales {
+    border-left: 4px solid #10b981;
+}
+
+.stats-grid .stat-card.ingresos-fiscales .stat-icon {
+    background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+/* Tabla Facturas */
+.table-modern.facturas-table thead th {
+    background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 16px;
+}
+
+.table-modern.facturas-table tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table-modern.facturas-table tbody tr:hover {
+    background: #faf5ff;
+}
+
+/* Número Factura */
+.numero-factura {
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    color: #8b5cf6;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+/* Serie y Correlativo */
+.factura-serie {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.factura-serie .badge {
+    background: #ede9fe;
+    color: #7c3aed;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* Monto */
+.factura-monto {
+    font-weight: 700;
+    color: #1f2937;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+}
+
+/* Estado Factura */
+.factura-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.factura-status.emitida {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.factura-status.pendiente {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.factura-status.anulada {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Link PDF */
+.pdf-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: linear-gradient(135deg, #ef4444, #f87171);
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.pdf-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    color: white;
+}
+
+.pdf-link i {
+    font-size: 14px;
+}
+
+/* Filtros Fecha */
+.filter-section .date-range {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-section .date-range input {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+}
+
+.filter-section .date-range .separator {
+    color: #9ca3af;
+    font-weight: 600;
+}
+
+/* Modal Factura */
+.modal-header-custom.facturas {
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+}
+
+/* Detalles Factura */
+.factura-details {
+    background: #faf5ff;
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 4px solid #8b5cf6;
+    margin-bottom: 16px;
+}
+
+.factura-details .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ede9fe;
+}
+
+.factura-details .detail-row:last-child {
+    border-bottom: none;
+}
+
+.factura-details .detail-label {
+    font-weight: 600;
+    color: #374151;
+}
+
+.factura-details .detail-value {
+    font-weight: 700;
+    color: #1f2937;
+}
+
+/* Animaciones */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .table-modern.facturas-table {
+        font-size: 12px;
+    }
+
+    .filter-section .date-range {
+        flex-direction: column;
+    }
+
+    .factura-details .detail-row {
+        flex-direction: column;
+        gap: 4px;
+    }
+}

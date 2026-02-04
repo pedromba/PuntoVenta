@@ -1,0 +1,168 @@
+/* ============================================
+   VENTAS - Estilos Específicos
+   ============================================ */
+
+.ventas-container {
+    animation: slideInUp 0.3s ease-out;
+}
+
+/* Stats Cards Ventas */
+.stats-grid .stat-card {
+    transition: all 0.3s ease;
+}
+
+.stats-grid .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card.completadas {
+    border-left: 4px solid #10b981;
+}
+
+.stat-card.completadas .stat-icon {
+    background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+.stat-card.presupuestos {
+    border-left: 4px solid #f59e0b;
+}
+
+.stat-card.presupuestos .stat-icon {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+.stat-card.anuladas {
+    border-left: 4px solid #ef4444;
+}
+
+.stat-card.anuladas .stat-icon {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+.stat-card.ingresos {
+    border-left: 4px solid #667eea;
+}
+
+.stat-card.ingresos .stat-icon {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* Tabla Ventas */
+.table-modern.ventas-table thead th {
+    background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 16px;
+}
+
+.table-modern.ventas-table tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table-modern.ventas-table tbody tr:hover {
+    background: #f0fdf4;
+}
+
+/* Status Venta */
+.venta-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.venta-status.completada {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.venta-status.presupuesto {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.venta-status.anulada {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Métodos Pago */
+.metodo-pago {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: #f3f4f6;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.metodo-pago i {
+    font-size: 14px;
+}
+
+/* Folio */
+.folio-venta {
+    font-weight: 700;
+    color: #667eea;
+    font-family: 'Courier New', monospace;
+}
+
+/* Modal Venta */
+.modal-header-custom.ventas {
+    background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+}
+
+/* Filtros */
+.filter-section .date-range {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.filter-section .date-range input {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+/* Totales */
+.venta-total {
+    font-weight: 700;
+    color: #10b981;
+    font-size: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .table-modern.ventas-table {
+        font-size: 12px;
+    }
+
+    .filter-section .date-range {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

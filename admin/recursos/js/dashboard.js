@@ -29,6 +29,19 @@ class Dashboard {
         // Menu items
         this.menuItems.forEach(item => {
             item.addEventListener('click', (e) => {
+                const href = item.getAttribute('href');
+                
+                // Si el enlace es un archivo .php válido, permitir navegación
+                if (href && href !== '#' && href.endsWith('.php')) {
+                    this.setActiveMenu(item);
+                    if (window.innerWidth < 992) {
+                        this.closeSidebar();
+                    }
+                    // Permitir que el navegador navegue
+                    return true;
+                }
+                
+                // Para otros casos, prevenir por defecto
                 e.preventDefault();
                 this.setActiveMenu(item);
                 if (window.innerWidth < 992) {
@@ -103,39 +116,65 @@ class Dashboard {
     }
 
     initCharts() {
-        this.createRevenueChart();
-        this.createPlansChart();
+        this.createVentasChart();
+        this.createCategoriasChart();
+        // Simular carga de datos
+        this.loadDashboardData();
     }
 
-    createRevenueChart() {
-        const ctx = document.getElementById('revenueChart');
+    createVentasChart() {
+        const ctx = document.getElementById('ventasChart');
         if (!ctx) return;
 
         new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                datasets: [{
-                    label: 'Ingresos',
-                    data: [8500, 9200, 8800, 10500, 12300, 13500, 14200, 13800, 15600, 14800, 16200, 14250],
-                    borderColor: '#2563eb',
-                    backgroundColor: 'rgba(37, 99, 235, 0.08)',
-                    borderWidth: 2.5,
-                    fill: true,
-                    tension: 0.4,
-                    pointBackgroundColor: '#2563eb',
-                    pointBorderColor: '#fff',
-                    pointBorderWidth: 2.5,
-                    pointRadius: 5,
-                    pointHoverRadius: 7,
-                    pointHoverBorderWidth: 2,
-                }]
+                labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+                datasets: [
+                    {
+                        label: 'Ventas Completadas',
+                        data: [1200, 1900, 1500, 2200, 2800, 3100, 2600],
+                        borderColor: '#2563eb',
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#2563eb',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                    },
+                    {
+                        label: 'Ventas Pendientes',
+                        data: [400, 600, 500, 700, 800, 600, 500],
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#f59e0b',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                    }
+                ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
                 plugins: {
-                    legend: { display: false },
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            color: '#6b7280',
+                            font: { size: 13, family: "'Sora', sans-serif", weight: '500' },
+                            padding: 15,
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    },
                     filler: {
                         propagate: true
                     }
@@ -145,12 +184,13 @@ class Dashboard {
                         beginAtZero: true,
                         grid: {
                             color: '#f3f4f6',
-                            drawBorder: false
+                            drawBorder: false,
+                            lineWidth: 1
                         },
                         ticks: {
                             color: '#9ca3af',
                             font: { size: 12, family: "'Sora', sans-serif" },
-                            callback: (value) => '$' + (value / 1000).toFixed(0) + 'K'
+                            callback: (value) => '$' + value.toLocaleString()
                         }
                     },
                     x: {
@@ -168,16 +208,16 @@ class Dashboard {
         });
     }
 
-    createPlansChart() {
-        const ctx = document.getElementById('plansChart');
+    createCategoriasChart() {
+        const ctx = document.getElementById('categoriasChart');
         if (!ctx) return;
 
         new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: ['Pro', 'Premium', 'Básico', 'Prueba'],
+                labels: ['Electrónica', 'Ropa', 'Alimentos', 'Otros'],
                 datasets: [{
-                    data: [28, 12, 5, 2],
+                    data: [35, 25, 20, 20],
                     backgroundColor: [
                         '#2563eb',
                         '#10b981',
@@ -185,7 +225,8 @@ class Dashboard {
                         '#ef4444'
                     ],
                     borderColor: '#fff',
-                    borderWidth: 2
+                    borderWidth: 3,
+                    hoverOffset: 8
                 }]
             },
             options: {
@@ -197,14 +238,48 @@ class Dashboard {
                         labels: {
                             color: '#6b7280',
                             font: { size: 12, family: "'Sora', sans-serif" },
-                            padding: 16,
+                            padding: 15,
                             usePointStyle: true,
                             pointStyle: 'circle'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: 12,
+                        titleFont: { size: 13, weight: 'bold' },
+                        bodyFont: { size: 12 },
+                        cornerRadius: 6,
+                        displayColors: true,
+                        callbacks: {
+                            label: (context) => {
+                                return context.label + ': ' + context.parsed.y + '%';
+                            }
                         }
                     }
                 }
             }
         });
+    }
+
+    loadDashboardData() {
+        // Simular carga de datos del servidor
+        setTimeout(() => {
+            document.querySelector('.kpi-value:nth-of-type(1)')?.textContent || (
+                document.querySelectorAll('.kpi-value')[0].textContent = '12'
+            );
+            document.querySelectorAll('.kpi-value')[1].textContent = '248';
+            document.querySelectorAll('.kpi-value')[2].textContent = '1,350';
+            
+            // Actualizar barras de progreso
+            document.getElementById('ventas-progress')?.style.setProperty('width', '75%');
+            document.getElementById('stock-progress')?.style.setProperty('width', '82%');
+            document.getElementById('ingresos-progress')?.style.setProperty('width', '68%');
+            
+            // Valores de métricas
+            document.getElementById('total-ventas').textContent = '248';
+            document.getElementById('stock-total').textContent = '1,350';
+            document.getElementById('ingresos-total').textContent = '$45,280.50';
+        }, 500);
     }
 }
 

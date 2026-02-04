@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupPasswordToggle();
     setupFormValidation();
     setupSubmitHandlers();
+    setupLogoUpload();
 });
 
 // ==========================================
@@ -50,6 +51,79 @@ function setupPasswordToggle() {
             
             toggleBtn.innerHTML = `<i class="fas fa-eye${isPassword ? '-slash' : ''}"></i>`;
         });
+    }
+}
+
+// ==========================================
+// LOGO UPLOAD HANDLER
+// ==========================================
+
+function setupLogoUpload() {
+    const logoInput = document.getElementById('logo-input');
+    const logoPreview = document.getElementById('logoPreview');
+    const logoFileName = document.getElementById('logoFileName');
+
+    if (!logoInput) return;
+
+    // Manejar clic en el input de archivo
+    logoInput.addEventListener('change', (e) => {
+        handleLogoFile(e.target.files[0], logoPreview, logoFileName);
+    });
+
+    // Manejar drag and drop
+    const logoLabel = document.querySelector('.logo-upload-label');
+    if (logoLabel) {
+        logoLabel.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            logoPreview.style.borderColor = 'var(--primary)';
+            logoPreview.style.background = 'linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(14, 165, 233, 0.15) 100%)';
+        });
+
+        logoLabel.addEventListener('dragleave', () => {
+            logoPreview.style.borderColor = 'var(--border-color)';
+            logoPreview.style.background = 'linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(14, 165, 233, 0.08) 100%)';
+        });
+
+        logoLabel.addEventListener('drop', (e) => {
+            e.preventDefault();
+            logoPreview.style.borderColor = 'var(--border-color)';
+            logoPreview.style.background = 'linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(14, 165, 233, 0.08) 100%)';
+            
+            if (e.dataTransfer.files.length > 0) {
+                const file = e.dataTransfer.files[0];
+                logoInput.files = e.dataTransfer.files;
+                handleLogoFile(file, logoPreview, logoFileName);
+            }
+        });
+    }
+}
+
+function handleLogoFile(file, logoPreview, logoFileName) {
+    if (!file) return;
+
+    // Validar que sea una imagen
+    if (!file.type.startsWith('image/')) {
+        alert('Por favor selecciona un archivo de imagen');
+        return;
+    }
+
+    // Validar tamaño (máximo 5MB)
+    const maxSize = 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+        alert('El archivo debe pesar menos de 5MB');
+        return;
+    }
+
+    // Mostrar preview
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        logoPreview.innerHTML = `<img src="${e.target.result}" alt="Logo">`;
+    };
+    reader.readAsDataURL(file);
+
+    // Mostrar nombre del archivo
+    if (logoFileName) {
+        logoFileName.textContent = file.name;
     }
 }
 
@@ -113,6 +187,7 @@ function setupRegisterValidation(form) {
         const phone = document.getElementById('phone');
         const category = document.getElementById('category');
         const terms = document.getElementById('terms');
+        const termsWrapper = document.querySelector('.register-terms');
 
         let isValid = true;
 
@@ -148,8 +223,16 @@ function setupRegisterValidation(form) {
 
         // Validar términos
         if (!terms.checked) {
+            if (termsWrapper) {
+                termsWrapper.classList.add('is-invalid');
+            }
             terms.classList.add('is-invalid');
             isValid = false;
+        } else {
+            if (termsWrapper) {
+                termsWrapper.classList.remove('is-invalid');
+            }
+            terms.classList.remove('is-invalid');
         }
 
         if (!isValid) {
@@ -160,12 +243,26 @@ function setupRegisterValidation(form) {
         form.classList.add('was-validated');
     });
 
-    // Limpiar validación al escribir
+    // Limpiar validación al escribir/cambiar
     form.querySelectorAll('.form-control, .form-select').forEach(input => {
         input.addEventListener('input', () => {
             input.classList.remove('is-invalid');
         });
     });
+
+    // Limpiar validación del checkbox de términos
+    const terms = document.getElementById('terms');
+    if (terms) {
+        terms.addEventListener('change', () => {
+            const termsWrapper = document.querySelector('.register-terms');
+            if (terms.checked) {
+                if (termsWrapper) {
+                    termsWrapper.classList.remove('is-invalid');
+                }
+                terms.classList.remove('is-invalid');
+            }
+        });
+    }
 }
 
 function isValidEmail(email) {

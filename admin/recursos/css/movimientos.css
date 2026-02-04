@@ -1,0 +1,265 @@
+/* ============================================
+   MOVIMIENTOS - Estilos Específicos
+   ============================================ */
+
+.movimientos-container {
+    animation: slideInUp 0.3s ease-out;
+}
+
+/* Stats Cards Tipos Movimiento */
+.movement-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.movement-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid #e5e7eb;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.movement-card:hover {
+    border-color: #667eea;
+    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.movement-card.entrada {
+    border-left: 4px solid #10b981;
+}
+
+.movement-card.entrada .movement-icon {
+    background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+.movement-card.salida {
+    border-left: 4px solid #ef4444;
+}
+
+.movement-card.salida .movement-icon {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+.movement-card.devolucion {
+    border-left: 4px solid #f59e0b;
+}
+
+.movement-card.devolucion .movement-icon {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+.movement-card.ajuste {
+    border-left: 4px solid #8b5cf6;
+}
+
+.movement-card.ajuste .movement-icon {
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+}
+
+.movement-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 24px;
+}
+
+.movement-count {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 8px 0;
+}
+
+.movement-label {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 600;
+}
+
+/* Tabla Movimientos */
+.table-modern.movimientos-table thead th {
+    background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%);
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 16px;
+}
+
+.table-modern.movimientos-table tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table-modern.movimientos-table tbody tr:hover {
+    background: #ecf9ff;
+}
+
+/* Tipo Movimiento */
+.tipo-movimiento {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.tipo-movimiento.entrada {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.tipo-movimiento.entrada i {
+    color: #10b981;
+}
+
+.tipo-movimiento.salida {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.tipo-movimiento.salida i {
+    color: #ef4444;
+}
+
+.tipo-movimiento.devolucion {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.tipo-movimiento.devolucion i {
+    color: #f59e0b;
+}
+
+.tipo-movimiento.ajuste {
+    background: #ede9fe;
+    color: #6b21a8;
+}
+
+.tipo-movimiento.ajuste i {
+    color: #8b5cf6;
+}
+
+/* Cantidades */
+.cantidad-movimiento {
+    font-weight: 700;
+    color: #1f2937;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+}
+
+.cantidad-movimiento.entrada {
+    color: #10b981;
+}
+
+.cantidad-movimiento.salida {
+    color: #ef4444;
+}
+
+/* Referencias */
+.referencia-movimiento {
+    font-size: 13px;
+    color: #667eea;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+}
+
+/* Usuario */
+.usuario-movimiento {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.usuario-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.usuario-nombre {
+    font-weight: 600;
+    color: #374151;
+    font-size: 13px;
+}
+
+/* Fecha */
+.fecha-movimiento {
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Filtro Tipo Movimiento */
+.filter-section .movement-filter {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-section .movement-filter select {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+}
+
+/* Modal Movimiento */
+.modal-header-custom.movimientos {
+    background: linear-gradient(135deg, #06b6d4, #22d3ee);
+}
+
+/* Animaciones */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .movement-types {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .movement-card {
+        padding: 16px;
+    }
+
+    .movement-count {
+        font-size: 22px;
+    }
+
+    .table-modern.movimientos-table {
+        font-size: 12px;
+    }
+
+    .usuario-movimiento {
+        flex-direction: column;
+        gap: 4px;
+    }
+}

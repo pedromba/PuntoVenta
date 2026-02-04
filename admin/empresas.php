@@ -19,126 +19,13 @@
     <!-- CSS Personalizado -->
     <link rel="stylesheet" href="./recursos/css/dashboard.css">
     <link rel="stylesheet" href="./recursos/css/empresas.css">
+    
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../recursos/css/sweetalert2.css">
 </head>
 <body>
     <!-- Sidebar (Same as Dashboard) -->
-    <aside class="sidebar">
-        <div class="sidebar-brand">
-            <div class="brand-icon">
-                <i class="fas fa-rocket"></i>
-            </div>
-            <div class="brand-text">
-                <h4 class="m-0">PuntoVenta</h4>
-                <small>v2.0 Pro</small>
-            </div>
-            <button class="btn-sidebar-close d-lg-none">
-                <i class="fas fa-xmark"></i>
-            </button>
-        </div>
-
-        <nav class="sidebar-menu">
-            <div class="menu-group">
-                <div class="menu-title">Inicio</div>
-                <ul class="menu-list">
-                    <li>
-                        <a href="dashboard.php" class="menu-item" data-section="dashboard">
-                            <span class="menu-icon"><i class="fas fa-house"></i></span>
-                            <span class="menu-text">Dashboard</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="menu-group">
-                <div class="menu-title">Empresas</div>
-                <ul class="menu-list">
-                    <li>
-                        <a href="empresas.php" class="menu-item active" data-section="empresas">
-                            <span class="menu-icon"><i class="fas fa-building"></i></span>
-                            <span class="menu-text">Gestión</span>
-                            <span class="badge badge-count">47</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="menu-item" data-section="categorias">
-                            <span class="menu-icon"><i class="fas fa-layer-group"></i></span>
-                            <span class="menu-text">Categorías</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="menu-item" data-section="productos">
-                            <span class="menu-icon"><i class="fas fa-box"></i></span>
-                            <span class="menu-text">Productos</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="menu-group">
-                <div class="menu-title">Suscripciones</div>
-                <ul class="menu-list">
-                    <li>
-                        <a href="#" class="menu-item" data-section="planes">
-                            <span class="menu-icon"><i class="fas fa-star"></i></span>
-                            <span class="menu-text">Planes</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="menu-item" data-section="suscripciones">
-                            <span class="menu-icon"><i class="fas fa-credit-card"></i></span>
-                            <span class="menu-text">Activos</span>
-                            <span class="badge badge-warning badge-sm">5</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="menu-item" data-section="pagos">
-                            <span class="menu-icon"><i class="fas fa-wallet"></i></span>
-                            <span class="menu-text">Pagos</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="menu-group">
-                <div class="menu-title">Sistema</div>
-                <ul class="menu-list">
-                    <li>
-                        <a href="#" class="menu-item" data-section="usuarios">
-                            <span class="menu-icon"><i class="fas fa-user-shield"></i></span>
-                            <span class="menu-text">Usuarios</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="menu-item" data-section="auditoria">
-                            <span class="menu-icon"><i class="fas fa-history"></i></span>
-                            <span class="menu-text">Auditoría</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="menu-item" data-section="config">
-                            <span class="menu-icon"><i class="fas fa-gears"></i></span>
-                            <span class="menu-text">Configuración</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        <div class="sidebar-footer">
-            <div class="user-card">
-                <div class="user-avatar">
-                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=2563eb&color=fff&rounded=true" alt="Admin">
-                </div>
-                <div class="user-info">
-                    <div class="user-name">Administrador</div>
-                    <div class="user-status">En línea</div>
-                </div>
-                <button class="btn btn-sm btn-ghost">
-                    <i class="fas fa-ellipsis-vertical"></i>
-                </button>
-            </div>
-        </div>
-    </aside>
+    <?php include "./componentes/aside.php" ?>
 
     <div class="sidebar-overlay"></div>
 
@@ -156,26 +43,65 @@
             <div class="topbar-search d-none d-lg-flex">
                 <div class="search-wrapper">
                     <i class="fas fa-search"></i>
-                    <input type="text" id="searchEmpresas" placeholder="Buscar por nombre, NIF..." class="search-input">
+                    <input type="text" id="searchEmpresas" placeholder="Buscar por nombre, CUIT, email..." class="search-input" data-search="empresas">
+                    <div class="search-results" style="display: none;"></div>
                 </div>
             </div>
 
             <div class="topbar-right">
+                <!-- Notifications -->
                 <div class="notification-wrapper">
                     <button class="btn btn-icon btn-notification position-relative">
                         <i class="fas fa-bell"></i>
                         <span class="notification-badge">3</span>
                     </button>
+                    <div class="notification-menu">
+                        <div class="notification-header">
+                            <h6 class="m-0">Notificaciones</h6>
+                            <button class="btn btn-sm btn-ghost">Limpiar</button>
+                        </div>
+                        <div class="notification-list">
+                            <div class="notification-item unread">
+                                <div class="notification-icon info">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p class="mb-1"><strong>Nueva Empresa</strong></p>
+                                    <span>Se registró una nueva empresa en el sistema</span>
+                                    <small>Hace 2h</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-footer">
+                            <a href="#">Ver todas →</a>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Settings -->
                 <button class="btn btn-icon">
                     <i class="fas fa-gear"></i>
                 </button>
+
+                <!-- User Menu -->
                 <div class="user-menu-wrapper">
                     <button class="btn btn-user">
                         <img src="https://ui-avatars.com/api/?name=Admin+User&background=2563eb&color=fff&rounded=true" alt="Admin">
                         <span class="d-none d-md-inline">Admin</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
+                    <div class="user-menu">
+                        <a href="#" class="menu-link">
+                            <i class="fas fa-user"></i> Mi Perfil
+                        </a>
+                        <a href="#" class="menu-link">
+                            <i class="fas fa-key"></i> Cambiar Contraseña
+                        </a>
+                        <hr class="my-2">
+                        <a href="#" class="menu-link text-danger">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -187,7 +113,7 @@
                     <h1 class="page-title">Gestión de Empresas</h1>
                     <p class="page-subtitle">Administra todas las empresas del sistema</p>
                 </div>
-                <button class="btn btn-primary btn-lg" id="btnCrearEmpresa">
+                <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalEmpresa">
                     <i class="fas fa-plus"></i>
                     <span>Crear Empresa</span>
                 </button>
@@ -456,8 +382,88 @@
         </div>
     </main>
 
+    <!-- Modal Nueva Empresa -->
+    <div class="modal fade" id="modalEmpresa" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header modal-header-custom bg-primary">
+                    <h5 class="modal-title text-white">Crear Empresa</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEmpresa" class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nombre Empresa <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="nombre" placeholder="Mi Empresa S.A." required>
+                                <div class="invalid-feedback">El nombre es requerido.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Razón Social</label>
+                                <input type="text" class="form-control" name="razon_social" placeholder="Razón social completa">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">CUIT <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="cuit" placeholder="20-12345678-9" required>
+                                <div class="invalid-feedback">El CUIT es requerido.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" name="email" placeholder="contacto@empresa.com" required>
+                                <div class="invalid-feedback">Email válido requerido.</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Teléfono</label>
+                                <input type="tel" class="form-control" name="telefono" placeholder="+54 9 11 XXXX-XXXX">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Web</label>
+                                <input type="url" class="form-control" name="web" placeholder="https://www.empresa.com">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Dirección <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="direccion" placeholder="Calle 123, Piso 4" required>
+                            <div class="invalid-feedback">La dirección es requerida.</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Ciudad</label>
+                                <input type="text" class="form-control" name="ciudad" placeholder="Buenos Aires">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Provincia</label>
+                                <input type="text" class="form-control" name="provincia" placeholder="Buenos Aires">
+                            </div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" name="activa" id="empresaActiva" checked>
+                            <label class="form-check-label" for="empresaActiva">Empresa Activa</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="document.getElementById('formEmpresa').dispatchEvent(new Event('submit'))">
+                        <i class="fas fa-save me-2"></i>Crear Empresa
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- SweetAlert2 -->
+    <script src="../recursos/js/sweetalert2.all.js"></script>
+    
+    <!-- Dashboard JS -->
+    <script src="./recursos/js/dashboard.js"></script>
     
     <!-- Empresas JS -->
     <script src="./recursos/js/empresas.js"></script>

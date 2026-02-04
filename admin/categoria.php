@@ -21,134 +21,13 @@
     
     <!-- CSS Personalizado Categorías -->
     <link rel="stylesheet" href="./recursos/css/categoriasEmpresas.css">
+    
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../recursos/css/sweetalert2.css">
 </head>
 <body>
     <!-- Sidebar Moderno (Igual al Dashboard) -->
-    <aside class="sidebar">
-        <!-- Branding -->
-        <div class="sidebar-brand">
-            <div class="brand-icon">
-                <i class="fas fa-rocket"></i>
-            </div>
-            <div class="brand-text">
-                <h4 class="m-0">PuntoVenta</h4>
-                <small>v2.0 Pro</small>
-            </div>
-            <button class="btn-sidebar-close d-lg-none">
-                <i class="fas fa-xmark"></i>
-            </button>
-        </div>
-
-        <!-- Navigation -->
-        <nav class="sidebar-menu">
-            <!-- Dashboard -->
-            <div class="menu-group">
-                <div class="menu-title">Inicio</div>
-                <ul class="menu-list">
-                    <li>
-                        <a href="dashboard.php" class="menu-item" data-section="dashboard">
-                            <span class="menu-icon"><i class="fas fa-house"></i></span>
-                            <span class="menu-text">Dashboard</span>
-                            <span class="badge badge-pulse">HOY</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Empresas -->
-            <div class="menu-group">
-                <div class="menu-title">Empresas</div>
-                <ul class="menu-list">
-                    <li>
-                        <a href="empresas.php" class="menu-item" data-section="empresas">
-                            <span class="menu-icon"><i class="fas fa-building"></i></span>
-                            <span class="menu-text">Gestión</span>
-                            <span class="badge badge-count">47</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="categoria.php" class="menu-item active" data-section="categorias">
-                            <span class="menu-icon"><i class="fas fa-layer-group"></i></span>
-                            <span class="menu-text">Categorías</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="productos.php" class="menu-item" data-section="productos">
-                            <span class="menu-icon"><i class="fas fa-box"></i></span>
-                            <span class="menu-text">Productos</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Suscripciones -->
-            <div class="menu-group">
-                <div class="menu-title">Suscripciones</div>
-                <ul class="menu-list">
-                    <li>
-                        <a href="planes.php" class="menu-item" data-section="planes">
-                            <span class="menu-icon"><i class="fas fa-star"></i></span>
-                            <span class="menu-text">Planes</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="suscripciones.php" class="menu-item" data-section="suscripciones">
-                            <span class="menu-icon"><i class="fas fa-credit-card"></i></span>
-                            <span class="menu-text">Activos</span>
-                            <span class="badge badge-warning badge-sm">5</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="pagos.php" class="menu-item" data-section="pagos">
-                            <span class="menu-icon"><i class="fas fa-wallet"></i></span>
-                            <span class="menu-text">Pagos</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Sistema -->
-            <div class="menu-group">
-                <div class="menu-title">Sistema</div>
-                <ul class="menu-list">
-                    <li>
-                        <a href="usuarios.php" class="menu-item" data-section="usuarios">
-                            <span class="menu-icon"><i class="fas fa-user-shield"></i></span>
-                            <span class="menu-text">Usuarios</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="auditoria.php" class="menu-item" data-section="auditoria">
-                            <span class="menu-icon"><i class="fas fa-history"></i></span>
-                            <span class="menu-text">Auditoría</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="config.php" class="menu-item" data-section="config">
-                            <span class="menu-icon"><i class="fas fa-gears"></i></span>
-                            <span class="menu-text">Configuración</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        <!-- Sidebar Footer -->
-        <div class="sidebar-footer">
-            <div class="user-card">
-                <div class="user-avatar">
-                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=2563eb&color=fff&rounded=true" alt="Admin">
-                </div>
-                <div class="user-info">
-                    <div class="user-name">Administrador</div>
-                    <div class="user-status">En línea</div>
-                </div>
-                <button class="btn btn-sm btn-ghost">
-                    <i class="fas fa-ellipsis-vertical"></i>
-                </button>
-            </div>
-        </div>
-    </aside>
+    <?php include "./componentes/aside.php" ?>
 
     <!-- Overlay Sidebar Mobile -->
     <div class="sidebar-overlay"></div>
@@ -244,7 +123,7 @@
                     </h1>
                     <p class="page-subtitle">Administra las categorías de productos de tu negocio</p>
                 </div>
-                <button class="btn btn-primary btn-lg" id="btnAgregarCategoria">
+                <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalCategoria">
                     <i class="fas fa-plus-circle me-2"></i>Nueva Categoría
                 </button>
             </div>
@@ -370,6 +249,53 @@
             </footer>
         </div>
     </main>
+
+    <!-- Modal Nueva Categoría -->
+    <div class="modal fade" id="modalCategoria" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header modal-header-custom bg-primary">
+                    <h5 class="modal-title text-white">Nueva Categoría</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formCategoria" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label">Nombre Categoría <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="nombre" placeholder="Electrónica, Ropa, Alimentos, etc." required>
+                            <div class="invalid-feedback">El nombre es requerido.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Descripción</label>
+                            <textarea class="form-control" name="descripcion" rows="3" placeholder="Descripción de la categoría..."></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Categoría Padre</label>
+                                <select class="form-select" name="categoria_padre_id">
+                                    <option value="">Sin categoría padre</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Ícono (Class Font Awesome)</label>
+                                <input type="text" class="form-control" name="icono" placeholder="fas fa-laptop">
+                            </div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" name="activa" id="categoriaActiva" checked>
+                            <label class="form-check-label" for="categoriaActiva">Categoría Activa</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="document.getElementById('formCategoria').dispatchEvent(new Event('submit'))">
+                        <i class="fas fa-save me-2"></i>Guardar Categoría
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal Agregar/Editar Categoría -->
     <div class="modal fade" id="modalCategoria" tabindex="-1">
@@ -526,6 +452,12 @@
 
     <!-- Bootstrap JS -->
     <script src="../recursos/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- SweetAlert2 -->
+    <script src="../recursos/js/sweetalert2.all.js"></script>
+    
+    <!-- Dashboard JS -->
+    <script src="./recursos/js/dashboard.js"></script>
     
     <!-- JS Personalizado -->
     <script src="./recursos/js/categoriaempresa.js"></script>
