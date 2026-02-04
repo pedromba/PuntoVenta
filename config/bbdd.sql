@@ -1,9 +1,10 @@
--- Active: 1769673830758@@127.0.0.1@3306@puntoventa
+-- Active: 1769673830758@@127.0.0.1@3306
 DROP DATABASE IF EXISTS puntoventa;
 CREATE DATABASE IF NOT EXISTS puntoventa
   DEFAULT CHARACTER SET utf8mb4
   DEFAULT COLLATE utf8mb4_unicode_ci;
 USE puntoventa;
+
 
 -- =============================================
 -- 1. ESTRUCTURA DE EMPRESA Y PERSONALIZACIÓN

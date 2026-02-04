@@ -251,73 +251,73 @@
                                 </div>
 
                                 <!-- Formulario de Registro -->
-                                <form id="registerForm" action="config/process_register.php" method="POST" class="needs-validation" novalidate>
-                                    <!-- Nombre Comercial -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="company-name">
-                                            <i class="fas fa-store me-2"></i>Nombre Comercial
-                                        </label>
-                                        <input 
-                                            type="text" 
-                                            class="form-control register-input" 
-                                            id="company-name" 
-                                            name="companyName" 
-                                            placeholder="Ej: TechStore S.A." 
-                                            required
-                                        >
-                                        <div class="invalid-feedback">El nombre comercial es requerido</div>
+                                <form id="registerForm" action="config/process_register.php" method="POST" class="needs-validation register-form" novalidate>
+                                    <!-- Fila 1: Nombre
+                                      Comercial y NIF/CIF -->
+                                    <div class="form-row">
+                                        <div class="form-group form-group-half">
+                                            <label class="form-label" for="company-name">
+                                                <i class="fas fa-store me-2"></i>Nombre Comercial
+                                            </label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control register-input" 
+                                                id="company-name" 
+                                                name="companyName" 
+                                                placeholder="TechStore S.A." 
+                                                required
+                                            >
+                                            <div class="invalid-feedback">El nombre comercial es requerido</div>
+                                        </div>
+
+                                        <div class="form-group form-group-half">
+                                            <label class="form-label" for="nif-cif">
+                                                <i class="fas fa-id-card me-2"></i>NIF/CIF
+                                            </label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control register-input" 
+                                                id="nif-cif" 
+                                                name="nifCif" 
+                                                placeholder="A12345678" 
+                                                required
+                                            >
+                                            <div class="invalid-feedback">El NIF/CIF es requerido</div>
+                                        </div>
                                     </div>
 
-                                    <!-- NIF/CIF -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="nif-cif">
-                                            <i class="fas fa-id-card me-2"></i>NIF/CIF
-                                        </label>
-                                        <input 
-                                            type="text" 
-                                            class="form-control register-input" 
-                                            id="nif-cif" 
-                                            name="nifCif" 
-                                            placeholder="Ej: A12345678" 
-                                            required
-                                        >
-                                        <div class="invalid-feedback">El NIF/CIF es requerido</div>
+                                    <!-- Fila 2: Email Contacto y Teléfono -->
+                                    <div class="form-row">
+                                        <div class="form-group form-group-half">
+                                            <label class="form-label" for="contact-email">
+                                                <i class="fas fa-envelope me-2"></i>Correo de Contacto
+                                            </label>
+                                            <input 
+                                                type="email" 
+                                                class="form-control register-input" 
+                                                id="contact-email" 
+                                                name="contactEmail" 
+                                                placeholder="contacto@empresa.com" 
+                                                required
+                                            >
+                                            <div class="invalid-feedback">Ingresa un correo válido</div>
+                                        </div>
+
+                                        <div class="form-group form-group-half">
+                                            <label class="form-label" for="phone">
+                                                <i class="fas fa-phone me-2"></i>Teléfono
+                                            </label>
+                                            <input 
+                                                type="tel" 
+                                                class="form-control register-input" 
+                                                id="phone" 
+                                                name="phone" 
+                                                placeholder="+240 222 123456"
+                                            >
+                                        </div>
                                     </div>
 
-                                    <!-- Email Contacto -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="contact-email">
-                                            <i class="fas fa-envelope me-2"></i>Correo de Contacto
-                                        </label>
-                                        <input 
-                                            type="email" 
-                                            class="form-control register-input" 
-                                            id="contact-email" 
-                                            name="contactEmail" 
-                                            placeholder="contacto@empresa.com" 
-                                            required
-                                        >
-                                        <div class="invalid-feedback">Ingresa un correo válido</div>
-                                    </div>
-
-                                    <!-- Teléfono -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="phone">
-                                            <i class="fas fa-phone me-2"></i>Teléfono (Opcional)
-                                        </label>
-                                        <input 
-                                            type="tel" 
-                                            class="form-control register-input" 
-                                            id="phone" 
-                                            name="phone" 
-                                            placeholder="+240 222 123456"
-                                        >
-                                        <small class="text-muted">
-                                            <i class="fas fa-info-circle me-1"></i>Formato: +240 222/555 XXXXXX
-                                        </small>
-                                    </div>
-
-                                    <!-- Categoría Negocio -->
+                                    <!-- Fila 3: Categoría Negocio -->
                                     <div class="form-group">
                                         <label class="form-label" for="category">
                                             <i class="fas fa-layer-group me-2"></i>Categoría de Negocio
@@ -338,23 +338,8 @@
                                         <div class="invalid-feedback">Selecciona una categoría</div>
                                     </div>
 
-                                    <!-- Alert Info -->
-                                    <div class="alert alert-info alert-dismissible fade show mb-3" role="alert">
-                                        <div class="d-flex align-items-start">
-                                            <i class="fas fa-lightbulb me-3 mt-1"></i>
-                                            <div>
-                                                <strong>Información Importante:</strong>
-                                                <p class="mb-0 mt-1 small">
-                                                    Se enviará un correo de confirmación a la dirección ingresada. 
-                                                    El registro estará completo después de verificar tu correo.
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                    </div>
-
-                                    <!-- Terms -->
-                                    <div class="form-check mb-3">
+                                    <!-- Términos y Condiciones -->
+                                    <div class="form-check register-terms">
                                         <input 
                                             type="checkbox" 
                                             class="form-check-input" 
@@ -366,7 +351,7 @@
                                             Acepto los <a href="#" class="link-forgot-password">términos de servicio</a> 
                                             y la <a href="#" class="link-forgot-password">política de privacidad</a>
                                         </label>
-                                        <div class="invalid-feedback">Debes aceptar los términos y condiciones</div>
+                                        <div class="invalid-feedback d-block">Debes aceptar los términos y condiciones</div>
                                     </div>
 
                                     <!-- Submit Button -->
