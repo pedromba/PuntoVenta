@@ -236,41 +236,18 @@
                 </div>
                 <div class="modal-body">
                     <form id="formImpuesto" class="needs-validation" novalidate>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Nombre del Impuesto <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="nombre" placeholder="IVA, Impuesto Municipal, etc." required>
-                                <div class="invalid-feedback">El nombre es requerido.</div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Código <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="codigo" placeholder="IVA_21" required>
-                                <div class="invalid-feedback">El código es requerido.</div>
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nombre del Impuesto <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="nombre" placeholder="IVA 21%, Impuesto Municipal, etc." required>
+                            <div class="invalid-feedback">El nombre es requerido.</div>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Descripción</label>
-                            <textarea class="form-control" name="descripcion" rows="2" placeholder="Descripción del impuesto..."></textarea>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Porcentaje (%) <span class="text-danger">*</span></label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" name="porcentaje" placeholder="0.00" step="0.01" min="0" max="100" required>
-                                    <span class="input-group-text">%</span>
-                                </div>
-                                <div class="invalid-feedback">El porcentaje es requerido.</div>
+                            <label class="form-label">Porcentaje (%) <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="porcentaje" placeholder="0.00" step="0.01" min="0" max="100" required>
+                                <span class="input-group-text">%</span>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Tipo Aplicación <span class="text-danger">*</span></label>
-                                <select class="form-select" name="tipo_aplicacion" required>
-                                    <option value="">Seleccionar...</option>
-                                    <option value="venta">Sobre Venta</option>
-                                    <option value="compra">Sobre Compra</option>
-                                    <option value="ambas">Ambas</option>
-                                </select>
-                                <div class="invalid-feedback">Selecciona un tipo.</div>
-                            </div>
+                            <div class="invalid-feedback">El porcentaje es requerido.</div>
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" name="activo" id="impuestoActivo" checked>

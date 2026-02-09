@@ -226,43 +226,44 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">Nombre del Producto</label>
+                                    <label class="form-label">Nombre del Producto <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="nombre" required>
                                     <div class="invalid-feedback">El nombre es requerido</div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">SKU Interno</label>
-                                    <input type="text" class="form-control" name="sku" placeholder="SKU-001" required>
+                                    <label class="form-label">SKU Interno <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="sku_interno" placeholder="SKU-001" required>
                                     <div class="invalid-feedback">El SKU es requerido</div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label">Categoría</label>
-                                    <select class="form-select" name="categoria_id" required>
-                                        <option value="">Seleccionar categoría</option>
-                                        <option value="1">Electrónica</option>
-                                        <option value="2">Ropa</option>
-                                        <option value="3">Alimentos</option>
+                                    <label class="form-label">Unidad de Medida <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="unidad_id" required>
+                                        <option value="">Seleccionar unidad</option>
                                     </select>
-                                    <div class="invalid-feedback">Seleccione una categoría</div>
+                                    <div class="invalid-feedback">Seleccione una unidad</div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Categoría</label>
+                                    <select class="form-select" name="categoria_id">
+                                        <option value="">Seleccionar categoría</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="mb-3">
                                     <label class="form-label">Marca</label>
-                                    <select class="form-select" name="marca_id" required>
+                                    <select class="form-select" name="marca_id">
                                         <option value="">Seleccionar marca</option>
-                                        <option value="1">Samsung</option>
-                                        <option value="2">LG</option>
-                                        <option value="3">Generic</option>
                                     </select>
-                                    <div class="invalid-feedback">Seleccione una marca</div>
                                 </div>
                             </div>
                         </div>
@@ -270,20 +271,20 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">Precio de Compra</label>
+                                    <label class="form-label">Precio de Compra (Actual) <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <span class="input-group-text">$</span>
-                                        <input type="number" class="form-control" name="precio_compra" step="0.01" required>
+                                        <input type="number" class="form-control" name="precio_compra_actual" step="0.01" min="0" required>
                                     </div>
                                     <div class="invalid-feedback">Ingrese el precio de compra</div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">Precio de Venta</label>
+                                    <label class="form-label">Precio de Venta (Estándar) <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <span class="input-group-text">$</span>
-                                        <input type="number" class="form-control" name="precio_venta" step="0.01" required>
+                                        <input type="number" class="form-control" name="precio_venta_estandar" step="0.01" min="0" required>
                                     </div>
                                     <div class="invalid-feedback">Ingrese el precio de venta</div>
                                 </div>
@@ -293,25 +294,20 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">Stock</label>
-                                    <input type="number" class="form-control" name="stock" min="0" required>
-                                    <div class="invalid-feedback">Ingrese el stock</div>
+                                    <label class="form-label">Stock Actual <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" name="stock_actual" step="0.001" min="0" required>
+                                    <div class="invalid-feedback">Ingrese el stock actual</div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">Stock Mínimo</label>
-                                    <input type="number" class="form-control" name="stock_minimo" min="0" value="10">
+                                    <label class="form-label">Stock Mínimo <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" name="stock_minimo" step="0.001" min="0" value="0" required>
                                 </div>
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Descripción</label>
-                            <textarea class="form-control" name="descripcion" rows="3" placeholder="Detalles del producto..."></textarea>
-                        </div>
-
-                        <div class="mb-0">
                             <label class="form-check">
                                 <input type="checkbox" class="form-check-input" name="activo" checked>
                                 <span class="form-check-label">Producto Activo</span>

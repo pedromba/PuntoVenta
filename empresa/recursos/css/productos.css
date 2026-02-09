@@ -1,0 +1,62 @@
+/* Productos Styles */
+
+.stock-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stock-bar {
+  flex: 1;
+  background: var(--light);
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.stock-bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--primary-color), var(--info-color));
+  border-radius: 3px;
+}
+
+.stock-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  min-width: 30px;
+}
+
+.product-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.product-sku {
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 3px;
+}
+
+/* Modal Add Product */
+.product-form-group {
+  margin-bottom: 15px;
+}
+
+.product-form-group label {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  display: block;
+}
+
+#addProductModal textarea {
+  resize: vertical;
+}
+
+@media (max-width: 768px) {
+  .stock-bar {
+    display: none;
+  }
+}

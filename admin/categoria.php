@@ -265,26 +265,6 @@
                             <input type="text" class="form-control" name="nombre" placeholder="Electrónica, Ropa, Alimentos, etc." required>
                             <div class="invalid-feedback">El nombre es requerido.</div>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Descripción</label>
-                            <textarea class="form-control" name="descripcion" rows="3" placeholder="Descripción de la categoría..."></textarea>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Categoría Padre</label>
-                                <select class="form-select" name="categoria_padre_id">
-                                    <option value="">Sin categoría padre</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Ícono (Class Font Awesome)</label>
-                                <input type="text" class="form-control" name="icono" placeholder="fas fa-laptop">
-                            </div>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" name="activa" id="categoriaActiva" checked>
-                            <label class="form-check-label" for="categoriaActiva">Categoría Activa</label>
-                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">

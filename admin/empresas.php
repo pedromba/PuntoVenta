@@ -6,7 +6,7 @@
     <title>Gestión de Empresas - PuntoVenta Admin</title>
     
     <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../recursos/css/all.css">
     
     <!-- CSS Personalizado -->
     <link rel="stylesheet" href="./recursos/css/dashboard.css">
@@ -24,9 +24,8 @@
     <link rel="stylesheet" href="../recursos/css/sweetalert2.css">
 </head>
 <body>
-    <!-- Sidebar (Same as Dashboard) -->
+    <!-- Sidebar -->
     <?php include "./componentes/aside.php" ?>
-
     <div class="sidebar-overlay"></div>
 
     <!-- Main Content -->
@@ -43,7 +42,7 @@
             <div class="topbar-search d-none d-lg-flex">
                 <div class="search-wrapper">
                     <i class="fas fa-search"></i>
-                    <input type="text" id="searchEmpresas" placeholder="Buscar por nombre, CUIT, email..." class="search-input" data-search="empresas">
+                    <input type="text" id="searchEmpresas" placeholder="Buscar por nombre, email..." class="search-input" autocomplete="off">
                     <div class="search-results" style="display: none;"></div>
                 </div>
             </div>
@@ -128,14 +127,11 @@
                     <div class="filter-group">
                         <select id="filterCategoria" class="form-select">
                             <option value="">Todas las categorías</option>
-                            <option value="Alimentos">Alimentos</option>
-                            <option value="Moda">Moda</option>
-                            <option value="Electronica">Electrónica</option>
-                            <option value="Ferreteria">Ferretería</option>
-                            <option value="Libros">Libros</option>
-                            <option value="Farmacia">Farmacia</option>
-                            <option value="Clinica">Clínica</option>
-                            <option value="Vehiculos">Vehículos</option>
+                            <option value="electronica">Electrónica</option>
+                            <option value="retail">Retail</option>
+                            <option value="servicios">Servicios</option>
+                            <option value="alimentos">Alimentos</option>
+                            <option value="moda">Moda</option>
                         </select>
                     </div>
 
@@ -152,7 +148,7 @@
                         <select id="filterOrden" class="form-select">
                             <option value="reciente">Más recientes</option>
                             <option value="nombre">Por nombre (A-Z)</option>
-                            <option value="ingresos">Por ingresos</option>
+                            <option value="usuarios">Por usuarios</option>
                         </select>
                     </div>
 
@@ -169,62 +165,67 @@
 
             <!-- Empresas Grid -->
             <section class="empresas-grid">
-                <div class="row g-3">
+                <div class="row g-4" id="empresasContainer">
                     <!-- Empresa Card 1 -->
-                    <div class="col-12 col-md-6 col-lg-4" data-animate="slide-in">
-                        <div class="empresa-card">
-                            <div class="empresa-header">
-                                <div class="empresa-status activo">
-                                    <span class="status-dot"></span>
-                                    <span class="status-text">Activa</span>
-                                </div>
-                                <button class="btn btn-icon btn-sm dropdown-toggle">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
+                    <div class="col-12 col-md-6 col-lg-4 empresa-item" data-categoria="electronica" data-estado="activo">
+                        <div class="empresa-card-modern">
+                            <!-- Status Badge -->
+                            <div class="empresa-status-badge activo">
+                                <span class="status-dot"></span>
+                                <span>Activa</span>
                             </div>
 
-                            <div class="empresa-logo">
-                                <div class="logo-placeholder">
-                                    <i class="fas fa-building"></i>
-                                </div>
-                            </div>
-
-                            <div class="empresa-info">
-                                <h5 class="empresa-nombre">TechStore</h5>
-                                <p class="empresa-nif">NIF: ES12345678X</p>
-                                <div class="empresa-categoria">
-                                    <span class="badge-category">Electrónica</span>
+                            <!-- Header con Logo -->
+                            <div class="empresa-card-header">
+                                <div class="empresa-logo-wrapper" style="background-image: url('https://via.placeholder.com/200x100?text=TechStore'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                                    <div class="empresa-logo-icon">
+                                        <i class="fas fa-laptop"></i>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="empresa-stats">
-                                <div class="stat">
-                                    <span class="stat-value">24</span>
-                                    <span class="stat-label">Usuarios</span>
+                            <!-- Body -->
+                            <div class="empresa-card-body">
+                                <h4 class="empresa-nombre">TechStore</h4>
+                                <p class="empresa-nif-text">NIF: <strong>ES12345678X</strong></p>
+                                
+                                <div class="empresa-categoria-badge">
+                                    <span>Electrónica</span>
                                 </div>
-                                <div class="stat">
-                                    <span class="stat-value">$599</span>
-                                    <span class="stat-label">Plan/mes</span>
+
+                                <!-- Stats -->
+                                <div class="empresa-card-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Usuarios</span>
+                                        <span class="stat-value">24</span>
+                                    </div>
+                                    <div class="stat-divider"></div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Plan</span>
+                                        <span class="stat-value">79 FCFA/mes</span>
+                                    </div>
+                                </div>
+
+                                <!-- Contact -->
+                                <div class="empresa-card-contact">
+                                    <a href="mailto:contact@tech.com" class="contact-link" title="Enviar email">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>contact@tech.com</span>
+                                    </a>
+                                    <a href="tel:+240222144858" class="contact-link" title="Llamar">
+                                        <i class="fas fa-phone"></i>
+                                        <span>+240 222 144 858</span>
+                                    </a>
                                 </div>
                             </div>
 
-                            <div class="empresa-contact">
-                                <div class="contact-item">
-                                    <i class="fas fa-envelope"></i>
-                                    <span>contact@tech.com</span>
-                                </div>
-                                <div class="contact-item">
-                                    <i class="fas fa-phone"></i>
-                                    <span>+34 912 345 678</span>
-                                </div>
-                            </div>
-
-                            <div class="empresa-actions">
-                                <button class="btn btn-sm btn-primary w-100">
+                            <!-- Actions -->
+                            <div class="empresa-card-footer">
+                                <button class="btn-card-action primary" onclick="verDetalles(1)" title="Ver detalles de la empresa">
                                     <i class="fas fa-eye"></i>
                                     Ver Detalles
                                 </button>
-                                <button class="btn btn-sm btn-outline-secondary w-100">
+                                <button class="btn-card-action secondary" onclick="editarEmpresa(1)" title="Editar información">
                                     <i class="fas fa-pen"></i>
                                     Editar
                                 </button>
@@ -233,60 +234,65 @@
                     </div>
 
                     <!-- Empresa Card 2 -->
-                    <div class="col-12 col-md-6 col-lg-4" data-animate="slide-in">
-                        <div class="empresa-card">
-                            <div class="empresa-header">
-                                <div class="empresa-status activo">
-                                    <span class="status-dot"></span>
-                                    <span class="status-text">Activa</span>
-                                </div>
-                                <button class="btn btn-icon btn-sm dropdown-toggle">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
+                    <div class="col-12 col-md-6 col-lg-4 empresa-item" data-categoria="retail" data-estado="activo">
+                        <div class="empresa-card-modern">
+                            <!-- Status Badge -->
+                            <div class="empresa-status-badge activo">
+                                <span class="status-dot"></span>
+                                <span>Activa</span>
                             </div>
 
-                            <div class="empresa-logo">
-                                <div class="logo-placeholder" style="background: linear-gradient(135deg, #10b981, #6ee7b7);">
-                                    S
-                                </div>
-                            </div>
-
-                            <div class="empresa-info">
-                                <h5 class="empresa-nombre">StarMart</h5>
-                                <p class="empresa-nif">NIF: ES87654321Y</p>
-                                <div class="empresa-categoria">
-                                    <span class="badge-category">Retail</span>
+                            <!-- Header con Logo -->
+                            <div class="empresa-card-header">
+                                <div class="empresa-logo-wrapper" style="background-image: url('https://via.placeholder.com/200x100?text=ShopHub'); background-size: contain; background-repeat: no-repeat; background-position: center; background: linear-gradient(135deg, #10b981, #6ee7b7);">
+                                    <div class="empresa-logo-icon" style="color: white;">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="empresa-stats">
-                                <div class="stat">
-                                    <span class="stat-value">89</span>
-                                    <span class="stat-label">Usuarios</span>
+                            <!-- Body -->
+                            <div class="empresa-card-body">
+                                <h4 class="empresa-nombre">StarMart</h4>
+                                <p class="empresa-nif-text">NIF: <strong>ES87654321Y</strong></p>
+                                
+                                <div class="empresa-categoria-badge">
+                                    <span>Retail</span>
                                 </div>
-                                <div class="stat">
-                                    <span class="stat-value">$999</span>
-                                    <span class="stat-label">Plan/mes</span>
+
+                                <!-- Stats -->
+                                <div class="empresa-card-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Usuarios</span>
+                                        <span class="stat-value">18</span>
+                                    </div>
+                                    <div class="stat-divider"></div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Plan</span>
+                                        <span class="stat-value">$399/mes</span>
+                                    </div>
+                                </div>
+
+                                <!-- Contact -->
+                                <div class="empresa-card-contact">
+                                    <a href="mailto:info@starmart.com" class="contact-link" title="Enviar email">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>info@starmart.com</span>
+                                    </a>
+                                    <a href="tel:+34933456789" class="contact-link" title="Llamar">
+                                        <i class="fas fa-phone"></i>
+                                        <span>+34 933 456 789</span>
+                                    </a>
                                 </div>
                             </div>
 
-                            <div class="empresa-contact">
-                                <div class="contact-item">
-                                    <i class="fas fa-envelope"></i>
-                                    <span>info@starmart.com</span>
-                                </div>
-                                <div class="contact-item">
-                                    <i class="fas fa-phone"></i>
-                                    <span>+34 933 456 789</span>
-                                </div>
-                            </div>
-
-                            <div class="empresa-actions">
-                                <button class="btn btn-sm btn-primary w-100">
+                            <!-- Actions -->
+                            <div class="empresa-card-footer">
+                                <button class="btn-card-action primary" onclick="verDetalles(2)" title="Ver detalles de la empresa">
                                     <i class="fas fa-eye"></i>
                                     Ver Detalles
                                 </button>
-                                <button class="btn btn-sm btn-outline-secondary w-100">
+                                <button class="btn-card-action secondary" onclick="editarEmpresa(2)" title="Editar información">
                                     <i class="fas fa-pen"></i>
                                     Editar
                                 </button>
@@ -295,160 +301,177 @@
                     </div>
 
                     <!-- Empresa Card 3 -->
-                    <div class="col-12 col-md-6 col-lg-4" data-animate="slide-in">
-                        <div class="empresa-card">
-                            <div class="empresa-header">
-                                <div class="empresa-status inactivo">
-                                    <span class="status-dot"></span>
-                                    <span class="status-text">Inactiva</span>
-                                </div>
-                                <button class="btn btn-icon btn-sm dropdown-toggle">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
+                    <div class="col-12 col-md-6 col-lg-4 empresa-item" data-categoria="servicios" data-estado="inactivo">
+                        <div class="empresa-card-modern">
+                            <!-- Status Badge -->
+                            <div class="empresa-status-badge inactivo">
+                                <span class="status-dot"></span>
+                                <span>Inactiva</span>
                             </div>
 
-                            <div class="empresa-logo">
-                                <div class="logo-placeholder" style="background: linear-gradient(135deg, #8b5cf6, #d8b4fe);">
-                                    B
-                                </div>
-                            </div>
-
-                            <div class="empresa-info">
-                                <h5 class="empresa-nombre">BusinessFlow</h5>
-                                <p class="empresa-nif">NIF: ES56789012Z</p>
-                                <div class="empresa-categoria">
-                                    <span class="badge-category">Servicios</span>
+                            <!-- Header con Logo -->
+                            <div class="empresa-card-header">
+                                <div class="empresa-logo-wrapper" style="background-image: url('https://via.placeholder.com/200x100?text=BusinessFlow'); background-size: contain; background-repeat: no-repeat; background-position: center; background: linear-gradient(135deg, #f59e0b, #fbbf24);">
+                                    <div class="empresa-logo-icon" style="color: white;">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="empresa-stats">
-                                <div class="stat">
-                                    <span class="stat-value">12</span>
-                                    <span class="stat-label">Usuarios</span>
+                            <!-- Body -->
+                            <div class="empresa-card-body">
+                                <h4 class="empresa-nombre">BusinessFlow</h4>
+                                <p class="empresa-nif-text">NIF: <strong>ES11223344Z</strong></p>
+                                
+                                <div class="empresa-categoria-badge">
+                                    <span>Servicios</span>
                                 </div>
-                                <div class="stat">
-                                    <span class="stat-value">$299</span>
-                                    <span class="stat-label">Plan/mes</span>
+
+                                <!-- Stats -->
+                                <div class="empresa-card-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Usuarios</span>
+                                        <span class="stat-value">8</span>
+                                    </div>
+                                    <div class="stat-divider"></div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Plan</span>
+                                        <span class="stat-value">$199/mes</span>
+                                    </div>
+                                </div>
+
+                                <!-- Contact -->
+                                <div class="empresa-card-contact">
+                                    <a href="mailto:support@business.com" class="contact-link" title="Enviar email">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>support@business.com</span>
+                                    </a>
+                                    <a href="tel:+34944567890" class="contact-link" title="Llamar">
+                                        <i class="fas fa-phone"></i>
+                                        <span>+34 944 567 890</span>
+                                    </a>
                                 </div>
                             </div>
 
-                            <div class="empresa-contact">
-                                <div class="contact-item">
-                                    <i class="fas fa-envelope"></i>
-                                    <span>hello@busflow.es</span>
-                                </div>
-                                <div class="contact-item">
-                                    <i class="fas fa-phone"></i>
-                                    <span>+34 945 678 901</span>
-                                </div>
-                            </div>
-
-                            <div class="empresa-actions">
-                                <button class="btn btn-sm btn-primary w-100">
+                            <!-- Actions -->
+                            <div class="empresa-card-footer">
+                                <button class="btn-card-action primary" onclick="verDetalles(3)" title="Ver detalles de la empresa">
                                     <i class="fas fa-eye"></i>
                                     Ver Detalles
                                 </button>
-                                <button class="btn btn-sm btn-outline-secondary w-100">
+                                <button class="btn-card-action secondary" onclick="editarEmpresa(3)" title="Editar información">
                                     <i class="fas fa-pen"></i>
                                     Editar
                                 </button>
                             </div>
                         </div>
                     </div>
-
-                    <!-- More company cards can be added here -->
                 </div>
             </section>
 
-            <!-- Pagination -->
-            <nav class="pagination-section">
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
-                    </li>
-                </ul>
-            </nav>
-
             <!-- Footer -->
             <footer class="app-footer">
-                <p>&copy; 2026 PuntoVenta. Todos los derechos reservados.</p>
+                <p>&copy; 2026 PuntoVenta - Sistema de Administración. Todos los derechos reservados.</p>
             </footer>
         </div>
     </main>
 
     <!-- Modal Nueva Empresa -->
-    <div class="modal fade" id="modalEmpresa" tabindex="-1">
+    <div class="modal fade" id="modalEmpresa" tabindex="-1" aria-labelledby="modalEmpresaLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header modal-header-custom bg-primary">
-                    <h5 class="modal-title text-white">Crear Empresa</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title text-white" id="modalEmpresaLabel">Crear Nueva Empresa</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="formEmpresa" class="needs-validation" novalidate>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Nombre Empresa <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="nombre" placeholder="Mi Empresa S.A." required>
+                                <label class="form-label">Nombre Comercial <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="nombre_comercial" placeholder="Mi Empresa S.A." required>
                                 <div class="invalid-feedback">El nombre es requerido.</div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Razón Social</label>
-                                <input type="text" class="form-control" name="razon_social" placeholder="Razón social completa">
+                                <label class="form-label">NIF/CIF <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="nif_cif" placeholder="ES12345678X" required>
+                                <div class="invalid-feedback">El NIF/CIF es requerido.</div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">CUIT <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="cuit" placeholder="20-12345678-9" required>
-                                <div class="invalid-feedback">El CUIT es requerido.</div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Email <span class="text-danger">*</span></label>
-                                <input type="email" class="form-control" name="email" placeholder="contacto@empresa.com" required>
+                                <label class="form-label">Email Contacto <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" name="email_contacto" placeholder="contacto@empresa.com" required>
                                 <div class="invalid-feedback">Email válido requerido.</div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Teléfono</label>
-                                <input type="tel" class="form-control" name="telefono" placeholder="+54 9 11 XXXX-XXXX">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Web</label>
-                                <input type="url" class="form-control" name="web" placeholder="https://www.empresa.com">
+                                <input type="tel" class="form-control" name="telefono" placeholder="+34 912 345 678">
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Dirección <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="direccion" placeholder="Calle 123, Piso 4" required>
-                            <div class="invalid-feedback">La dirección es requerida.</div>
+                            <label class="form-label">Dirección</label>
+                            <input type="text" class="form-control" name="direccion" placeholder="Calle 123, Piso 4">
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Ciudad</label>
-                                <input type="text" class="form-control" name="ciudad" placeholder="Buenos Aires">
+                                <label class="form-label">Sitio Web</label>
+                                <input type="url" class="form-control" name="web" placeholder="https://www.empresa.com">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Provincia</label>
-                                <input type="text" class="form-control" name="provincia" placeholder="Buenos Aires">
+                                <label class="form-label">Categoría <span class="text-danger">*</span></label>
+                                <select class="form-select" name="categoria_negocio" required>
+                                    <option value="">Seleccionar categoría...</option>
+                                    <option value="Alimentos">Alimentos</option>
+                                    <option value="Moda">Moda</option>
+                                    <option value="Electronica">Electrónica</option>
+                                    <option value="Ferreteria">Ferretería</option>
+                                    <option value="Libros">Libros</option>
+                                    <option value="Farmacia">Farmacia</option>
+                                    <option value="Clinica">Clínica</option>
+                                    <option value="Vehiculos">Vehículos</option>
+                                </select>
+                                <div class="invalid-feedback">Selecciona una categoría válida.</div>
                             </div>
                         </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" name="activa" id="empresaActiva" checked>
-                            <label class="form-check-label" for="empresaActiva">Empresa Activa</label>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Horario de Atención</label>
+                                <input type="text" class="form-control" name="horario_atencion" placeholder="Lunes a Viernes 9:00 - 18:00">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Cuenta Bancaria</label>
+                                <input type="text" class="form-control" name="cuenta_bancaria" placeholder="ES91 2100 0418 45023847">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Logo de la Empresa</label>
+                            <input type="file" class="form-control" name="logo_file" accept="image/*" id="logoUpload">
+                            <small class="form-text text-muted">Formatos soportados: JPG, PNG, GIF (máx. 5MB)</small>
+                            <!-- Preview del logo -->
+                            <div id="logoPreview" class="mt-2" style="display: none;">
+                                <small class="d-block mb-2">Vista previa:</small>
+                                <img id="previewImg" src="" alt="Logo preview" style="max-height: 150px; border-radius: 4px; border: 1px solid #ddd; padding: 4px;">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted">O URL del Logo (alternativa)</label>
+                            <input type="url" class="form-control" name="logo_url" placeholder="https://ejemplo.com/logo.png">
+                            <small class="form-text text-muted">Si cargas una imagen arriba, esta URL se ignorará</small>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Estado</label>
+                            <select class="form-select" name="estado">
+                                <option value="activo" selected>Activo</option>
+                                <option value="inactivo">Inactivo</option>
+                                <option value="suspendido">Suspendido</option>
+                            </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="document.getElementById('formEmpresa').dispatchEvent(new Event('submit'))">
+                    <button type="button" class="btn btn-primary" id="btnGuardarEmpresa">
                         <i class="fas fa-save me-2"></i>Crear Empresa
                     </button>
                 </div>
@@ -457,15 +480,37 @@
     </div>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../recursos/js/bootstrap.bundle.min.js"></script>
     
     <!-- SweetAlert2 -->
     <script src="../recursos/js/sweetalert2.all.js"></script>
-    
-    <!-- Dashboard JS -->
-    <script src="./recursos/js/dashboard.js"></script>
-    
-    <!-- Empresas JS -->
+
+    <!-- Custom JS -->
     <script src="./recursos/js/empresas.js"></script>
+    
+    <!-- Logo Preview Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoUpload = document.getElementById('logoUpload');
+            const previewDiv = document.getElementById('logoPreview');
+            const previewImg = document.getElementById('previewImg');
+            
+            if (logoUpload) {
+                logoUpload.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            previewImg.src = event.target.result;
+                            previewDiv.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        previewDiv.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

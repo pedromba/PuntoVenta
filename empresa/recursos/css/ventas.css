@@ -1,0 +1,92 @@
+/* Ventas Styles */
+
+.sales-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.sales-stat-card {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--info-color) 100%);
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.sales-stat-card h6 {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  opacity: 0.9;
+}
+
+.sales-stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Client Info in Sales */
+.client-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.client-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.client-details h6 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.client-details p {
+  font-size: 11px;
+  color: var(--gray);
+  margin: 3px 0 0 0;
+}
+
+/* Products Count */
+.products-count {
+  background: var(--light);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.products-count:hover {
+  background: #e5e7eb;
+}
+
+/* Tooltip */
+.tooltip-inner {
+  background: var(--dark);
+  font-size: 11px;
+  padding: 6px 8px;
+}
+
+@media (max-width: 768px) {
+  .sales-stats {
+    grid-template-columns: 1fr;
+  }
+}

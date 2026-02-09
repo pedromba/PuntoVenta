@@ -195,21 +195,9 @@
                 <div class="modal-body">
                     <form id="formMarca" class="needs-validation" novalidate>
                         <div class="mb-3">
-                            <label class="form-label">Nombre de la Marca</label>
+                            <label class="form-label">Nombre de la Marca <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="nombre" placeholder="Ej: Samsung, LG, etc." required>
                             <div class="invalid-feedback">El nombre de la marca es requerido</div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Descripción</label>
-                            <textarea class="form-control" name="descripcion" rows="3" placeholder="Información sobre la marca..."></textarea>
-                        </div>
-
-                        <div class="mb-0">
-                            <label class="form-check">
-                                <input type="checkbox" class="form-check-input" name="activo" checked>
-                                <span class="form-check-label">Marca Activa</span>
-                            </label>
                         </div>
                     </form>
                 </div>

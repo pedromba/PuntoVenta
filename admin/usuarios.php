@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Usuarios - PuntoVenta Admin</title>
+    <title>Gestión de Administradores - PuntoVenta Admin</title>
     
     <!-- Bootstrap 5 CSS -->
     <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +18,6 @@
     
     <!-- CSS Personalizado -->
     <link rel="stylesheet" href="./recursos/css/dashboard.css">
-    <link rel="stylesheet" href="./recursos/css/usuarios.css">
     
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="../recursos/css/sweetalert2.css">
@@ -225,14 +224,88 @@
                                         <th>Empresa</th>
                                         <th>Rol</th>
                                         <th>Estado</th>
-                                        <th>Último Acceso</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody id="usuarios-tbody">
                                     <tr class="table-row-hover">
-                                        <td colspan="8" class="text-center text-muted py-4">
-                                            <i class="fas fa-spinner fa-spin me-2"></i>Cargando usuarios...
+                                        <td><input type="checkbox" class="form-check-input"></td>
+                                        <td>
+                                            <strong>Carlos Admin</strong>
+                                        </td>
+                                        <td>carlos.admin@puntoventa.es</td>
+                                        <td>PuntoVenta Co.</td>
+                                        <td>
+                                            <span class="badge bg-danger">
+                                                Superadmin
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-success">
+                                                Activo
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-primary" title="Editar">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" title="Eliminar">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="table-row-hover">
+                                        <td><input type="checkbox" class="form-check-input"></td>
+                                        <td>
+                                            <strong>María Finanzas</strong>
+                                        </td>
+                                        <td>maria.finanzas@puntoventa.es</td>
+                                        <td>PuntoVenta Co.</td>
+                                        <td>
+                                            <span class="badge bg-info">
+                                                Finanzas
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-success">
+                                                Activo
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-primary" title="Editar">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" title="Eliminar">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="table-row-hover">
+                                        <td><input type="checkbox" class="form-check-input"></td>
+                                        <td>
+                                            <strong>Juan Almacén</strong>
+                                        </td>
+                                        <td>juan.almacen@puntoventa.es</td>
+                                        <td>PuntoVenta Co.</td>
+                                        <td>
+                                            <span class="badge bg-warning">
+                                                Almacén
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-success">
+                                                Activo
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-primary" title="Editar">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" title="Eliminar">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -261,8 +334,8 @@
                     <form id="formUsuario" class="needs-validation" novalidate>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Nombre Completo <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="nombre_completo" placeholder="Juan Pérez" required>
+                                <label class="form-label">Nombre <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="nombre" placeholder="Juan Pérez" required>
                                 <div class="invalid-feedback">El nombre es requerido.</div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -273,21 +346,10 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Nombre Usuario <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="username" placeholder="juanperez" required>
-                                <div class="invalid-feedback">El nombre de usuario es requerido.</div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Teléfono</label>
-                                <input type="tel" class="form-control" name="telefono" placeholder="+54 9 11 XXXX-XXXX">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
                                 <label class="form-label">Contraseña <span class="text-danger">*</span></label>
                                 <input type="password" class="form-control" name="password" placeholder="••••••••" required>
                                 <div class="invalid-feedback">La contraseña es requerida.</div>
-                                <small class="form-text text-muted">Mín. 8 caracteres, incluye mayúsculas, números y símbolos</small>
+                                <small class="form-text text-muted">Mín. 8 caracteres</small>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Confirmar Contraseña <span class="text-danger">*</span></label>
@@ -297,26 +359,27 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
+                                <label class="form-label">Empresa <span class="text-danger">*</span></label>
+                                <select class="form-select" name="empresa_id" required>
+                                    <option value="">Seleccionar empresa...</option>
+                                </select>
+                                <div class="invalid-feedback">Selecciona una empresa válida.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
                                 <label class="form-label">Rol <span class="text-danger">*</span></label>
-                                <select class="form-select" name="rol_id" required>
+                                <select class="form-select" name="rol" required>
                                     <option value="">Seleccionar rol...</option>
+                                    <option value="superadmin">Super Admin</option>
                                     <option value="admin">Administrador</option>
-                                    <option value="gerente">Gerente</option>
+                                    <option value="finanzas">Finanzas</option>
+                                    <option value="almacen">Almacén</option>
                                     <option value="vendedor">Vendedor</option>
-                                    <option value="almacenero">Almacenero</option>
                                 </select>
                                 <div class="invalid-feedback">Selecciona un rol válido.</div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Sucursal <span class="text-danger">*</span></label>
-                                <select class="form-select" name="sucursal_id" required>
-                                    <option value="">Seleccionar sucursal...</option>
-                                </select>
-                                <div class="invalid-feedback">Selecciona una sucursal válida.</div>
-                            </div>
                         </div>
                         <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" name="activo" id="usuarioActivo">
+                            <input type="checkbox" class="form-check-input" name="activo" id="usuarioActivo" checked>
                             <label class="form-check-label" for="usuarioActivo">Usuario Activo</label>
                         </div>
                     </form>

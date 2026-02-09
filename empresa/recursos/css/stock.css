@@ -1,0 +1,109 @@
+/* Stock Styles */
+
+.stock-number {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 16px;
+}
+
+.stock-row[data-status="optimo"] {
+  border-left: 3px solid var(--success-color);
+}
+
+.stock-row[data-status="bajo"] {
+  border-left: 3px solid var(--warning-color);
+}
+
+.stock-row[data-status="critico"] {
+  border-left: 3px solid var(--danger-color);
+  background: #fef2f2;
+}
+
+.stock-table {
+  width: 100%;
+}
+
+.stock-table td {
+  padding: 15px;
+  vertical-align: middle;
+}
+
+.stock-table tr:hover {
+  background: var(--light);
+}
+
+/* Product Name in Stock */
+.product-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Status Badge Variations */
+.status-optimo {
+  background: #dcfce7;
+  color: #166534;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-bajo {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-critico {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Action buttons for stock */
+.btn-adjust,
+.btn-history {
+  background: transparent;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--primary-color);
+  transition: all 0.3s;
+  margin-right: 5px;
+}
+
+.btn-adjust:hover,
+.btn-history:hover {
+  background: var(--light);
+  color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .stock-table th,
+  .stock-table td {
+    padding: 10px 8px;
+    font-size: 12px;
+  }
+}
