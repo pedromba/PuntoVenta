@@ -41,6 +41,13 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="/PuntoVenta/empresa/categorias.php" class="nav-link">
+            <i class="fas fa-layer-group"></i>
+            <span class="nav-text">Categorías</span>
+            <span class="nav-tooltip">Organizar por categorías</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="/PuntoVenta/empresa/ventas.php" class="nav-link">
             <i class="fas fa-shopping-cart"></i>
             <span class="nav-text">Ventas</span>
@@ -97,6 +104,13 @@
         <span>Administración</span>
       </h3>
       <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="/PuntoVenta/empresa/usuarios.php" class="nav-link">
+            <i class="fas fa-users"></i>
+            <span class="nav-text">Usuarios</span>
+            <span class="nav-tooltip">Gestionar usuarios de empresa</span>
+          </a>
+        </li>
         <li class="nav-item">
           <a href="/PuntoVenta/empresa/configuracion.php" class="nav-link">
             <i class="fas fa-cog"></i>

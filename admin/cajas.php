@@ -274,11 +274,6 @@
                                 <span class="detail-value" id="caja-monto-apertura">$0.00</span>
                             </div>
                         </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Observaciones</label>
-                            <textarea class="form-control" name="observaciones" rows="3" placeholder="Notas..."></textarea>
-                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">

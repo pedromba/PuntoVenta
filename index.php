@@ -214,6 +214,31 @@
                                         </label>
                                     </div>
 
+                                    <!-- Rol de Acceso -->
+                                    <div class="form-group mb-4">
+                                        <label class="form-label">
+                                            <i class="fas fa-user-shield me-2"></i>Tipo de Acceso
+                                        </label>
+                                        <div class="role-selector">
+                                            <label class="role-option">
+                                                <input type="radio" name="rol" value="empresa" checked>
+                                                <span>
+                                                    <i class="fas fa-store"></i>
+                                                    <strong>Empresa</strong>
+                                                    <small>Acceso a tu panel de negocio</small>
+                                                </span>
+                                            </label>
+                                            <label class="role-option">
+                                                <input type="radio" name="rol" value="admin">
+                                                <span>
+                                                    <i class="fas fa-user-tie"></i>
+                                                    <strong>Administrador</strong>
+                                                    <small>Gestión del sistema</small>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+
                                     <!-- Submit Button -->
                                     <button 
                                         type="submit" 
@@ -262,7 +287,7 @@
                                             type="text" 
                                             class="form-control register-input" 
                                             id="company-name" 
-                                            name="companyName" 
+                                            name="nombre_comercial" 
                                             placeholder="Ej: TechStore S.A." 
                                             required
                                         >
@@ -278,7 +303,7 @@
                                             type="text" 
                                             class="form-control register-input" 
                                             id="nif-cif" 
-                                            name="nifCif" 
+                                            name="nif_cif" 
                                             placeholder="Ej: A12345678" 
                                             required
                                         >
@@ -294,7 +319,7 @@
                                             type="email" 
                                             class="form-control register-input" 
                                             id="contact-email" 
-                                            name="contactEmail" 
+                                            name="email_contacto" 
                                             placeholder="contacto@empresa.com" 
                                             required
                                         >
@@ -310,7 +335,7 @@
                                             type="tel" 
                                             class="form-control register-input" 
                                             id="phone" 
-                                            name="phone" 
+                                            name="telefono" 
                                             placeholder="+240 222 123456"
                                         >
                                         <small class="text-muted">
@@ -326,17 +351,76 @@
                                         <select 
                                             class="form-select register-input" 
                                             id="category" 
-                                            name="category" 
+                                            name="categoria_empresa_id" 
                                             required
                                         >
                                             <option value="">Selecciona una categoría</option>
-                                            <option value="retail">Retail/Tienda</option>
-                                            <option value="restaurant">Restaurante/Bar</option>
-                                            <option value="pharmacy">Farmacia</option>
-                                            <option value="supermarket">Supermercado</option>
-                                            <option value="other">Otra</option>
+                                            <option value="1">Alimentos</option>
+                                            <option value="2">Moda</option>
+                                            <option value="3">Electrónica</option>
+                                            <option value="4">Ferretería</option>
+                                            <option value="5">Libros</option>
+                                            <option value="6">Farmacia</option>
+                                            <option value="7">Clínica</option>
+                                            <option value="8">Vehículos</option>
                                         </select>
                                         <div class="invalid-feedback">Selecciona una categoría</div>
+                                    </div>
+
+                                    <!-- Dirección -->
+                                    <div class="form-group">
+                                        <label class="form-label" for="address">
+                                            <i class="fas fa-map-marker-alt me-2"></i>Dirección (Opcional)
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            class="form-control register-input" 
+                                            id="address" 
+                                            name="direccion" 
+                                            placeholder="Calle 123, Piso 4"
+                                        >
+                                    </div>
+
+                                    <!-- Sitio Web -->
+                                    <div class="form-group">
+                                        <label class="form-label" for="website">
+                                            <i class="fas fa-globe me-2"></i>Sitio Web (Opcional)
+                                        </label>
+                                        <input 
+                                            type="url" 
+                                            class="form-control register-input" 
+                                            id="website" 
+                                            name="web" 
+                                            placeholder="https://www.empresa.com"
+                                        >
+                                    </div>
+
+                                    <!-- Horario de Atención -->
+                                    <div class="form-group">
+                                        <label class="form-label" for="hours">
+                                            <i class="fas fa-clock me-2"></i>Horario de Atención (Opcional)
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            class="form-control register-input" 
+                                            id="hours" 
+                                            name="horario_atencion" 
+                                            placeholder="Lunes a Viernes 9:00 - 18:00"
+                                        >
+                                    </div>
+
+                                    <!-- Cuenta Bancaria -->
+                                    <div class="form-group">
+                                        <label class="form-label" for="bank">
+                                            <i class="fas fa-university me-2"></i>Cuenta Bancaria (Opcional)
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            class="form-control register-input" 
+                                            id="bank" 
+                                            name="cuenta_bancaria" 
+                                            placeholder="ES91 2100 0418 45023847"
+                                        >
                                     </div>
 
                                     <!-- Alert Info -->

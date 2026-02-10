@@ -102,13 +102,16 @@
               </tr>
             </thead>
             <tbody id="productsTableBody">
+              <!-- Filas de ejemplo - serán reemplazadas por datos dinámicos -->
               <tr class="product-row" data-product-id="1" data-status="activo">
                 <td>
                   <div class="product-cell">
-                    <div class="product-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"><i class="fas fa-laptop"></i></div>
+                    <div class="product-image">
+                      <img src="https://via.placeholder.com/60x60?text=Laptop" alt="Laptop" class="product-img">
+                    </div>
                     <div class="product-info">
                       <div class="product-name">Laptop DELL XPS 13</div>
-                      <div class="product-description">Intel Core i7 - 16GB RAM</div>
+                      <small class="text-muted">SKU: PROD-LP-001</small>
                     </div>
                   </div>
                 </td>
@@ -140,10 +143,12 @@
               <tr class="product-row" data-product-id="2" data-status="activo">
                 <td>
                   <div class="product-cell">
-                    <div class="product-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"><i class="fas fa-mobile"></i></div>
+                    <div class="product-image">
+                      <img src="https://via.placeholder.com/60x60?text=iPhone" alt="iPhone" class="product-img">
+                    </div>
                     <div class="product-info">
                       <div class="product-name">iPhone 15 Pro Max</div>
-                      <div class="product-description">256GB - Space Black</div>
+                      <small class="text-muted">SKU: PROD-IF-015</small>
                     </div>
                   </div>
                 </td>
@@ -172,22 +177,30 @@
                 </td>
               </tr>
 
-              <tr class="product-row" data-category="accesorios" data-stock="bajo">
+              <tr class="product-row" data-product-id="3" data-category="accesorios" data-stock="bajo">
                 <td>
                   <div class="product-cell">
-                    <div class="product-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"><i class="fas fa-headphones"></i></div>
+                    <div class="product-image">
+                      <img src="https://via.placeholder.com/60x60?text=Auriculares" alt="Auriculares" class="product-img">
+                    </div>
                     <div class="product-info">
                       <div class="product-name">Auriculares Sony WH-1000XM5</div>
-                      <div class="product-sku">SKU-AC001</div>
+                      <small class="text-muted">SKU: SKU-AC001</small>
                     </div>
                   </div>
                 </td>
-                <td>SKU-AC001</td>
-                <td><span class="badge bg-info">Accesorios</span></td>
-                <td>$349.99</td>
+                <td><code>SKU-AC001</code></td>
+                <td>
+                  <div class="category-badge">
+                    <span class="badge bg-info">Accesorios</span>
+                    <span class="badge bg-secondary">Sony</span>
+                  </div>
+                </td>
+                <td><strong>$200.00</strong></td>
+                <td><strong class="text-success">$349.99</strong></td>
                 <td>
                   <div class="stock-display">
-                    <span class="stock-number">3</span>
+                    <span class="stock-info">3 / 5</span>
                     <div class="stock-bar"><div class="stock-fill" style="width: 15%;"></div></div>
                   </div>
                 </td>
@@ -201,22 +214,29 @@
                 </td>
               </tr>
 
-              <tr class="product-row" data-category="tablets" data-stock="disponible">
+              <tr class="product-row" data-product-id="4" data-stock="disponible">
                 <td>
                   <div class="product-cell">
-                    <div class="product-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"><i class="fas fa-tablet"></i></div>
+                    <div class="product-image">
+                      <img src="https://via.placeholder.com/60x60?text=iPad" alt="iPad" class="product-img">
+                    </div>
                     <div class="product-info">
                       <div class="product-name">iPad Air 6</div>
-                      <div class="product-sku">SKU-TB001</div>
+                      <small class="text-muted">SKU: SKU-TB001</small>
                     </div>
                   </div>
                 </td>
-                <td>SKU-TB001</td>
-                <td><span class="badge bg-success">Tablets</span></td>
-                <td>$799.99</td>
+                <td><code>SKU-TB001</code></td>
+                <td>
+                  <div class="category-badge">
+                    <span class="badge bg-success">Tablets</span>
+                  </div>
+                </td>
+                <td><strong>$500.00</strong></td>
+                <td><strong class="text-success">$799.99</strong></td>
                 <td>
                   <div class="stock-display">
-                    <span class="stock-number">12</span>
+                    <span class="stock-info">12 / 5</span>
                     <div class="stock-bar"><div class="stock-fill" style="width: 60%;"></div></div>
                   </div>
                 </td>
@@ -230,26 +250,57 @@
                 </td>
               </tr>
 
-              <tr class="product-row" data-category="laptops" data-stock="agotado">
+              <tr class="product-row" data-product-id="5" data-stock="agotado">
                 <td>
                   <div class="product-cell">
-                    <div class="product-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"><i class="fas fa-laptop"></i></div>
+                    <div class="product-image">
+                      <img src="https://via.placeholder.com/60x60?text=MacBook" alt="MacBook" class="product-img">
+                    </div>
                     <div class="product-info">
                       <div class="product-name">MacBook Pro 16"</div>
-                      <div class="product-sku">SKU-LP002</div>
+                      <small class="text-muted">SKU: SKU-LP002</small>
                     </div>
                   </div>
                 </td>
-                <td>SKU-LP002</td>
-                <td><span class="badge bg-primary">Laptops</span></td>
-                <td>$2,499.99</td>
+                <td><code>SKU-LP002</code></td>
+                <td>
+                  <div class="category-badge">
+                    <span class="badge bg-primary">Laptops</span>
+                    <span class="badge bg-secondary">Apple</span>
+                  </div>
+                </td>
+                <td><strong>$1,500.00</strong></td>
+                <td><strong class="text-success">$2,499.99</strong></td>
                 <td>
                   <div class="stock-display">
-                    <span class="stock-number">0</span>
+                    <span class="stock-info">0 / 2</span>
                     <div class="stock-bar"><div class="stock-fill" style="width: 0%;"></div></div>
                   </div>
                 </td>
                 <td><span class="status-badge status-agotado"><i class="fas fa-times-circle"></i> Agotado</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn-action btn-view" title="Ver"><i class="fas fa-eye"></i></button>
+                    <button class="btn-action btn-edit" title="Editar"><i class="fas fa-edit"></i></button>
+                    <button class="btn-action btn-delete" title="Eliminar"><i class="fas fa-trash"></i></button>
+                  </div>
+                </td>
+              </tr>
+                <td>
+                  <div class="category-badge">
+                    <span class="badge bg-danger">Móviles</span>
+                    <span class="badge bg-secondary">Apple</span>
+                  </div>
+                </td>
+                <td><strong>$750.00</strong></td>
+                <td><strong class="text-success">$1,199.99</strong></td>
+                <td>
+                  <div class="stock-display">
+                    <span class="stock-info">25 / 8</span>
+                    <div class="stock-bar"><div class="stock-fill" style="width: 100%;"></div></div>
+                  </div>
+                </td>
+                <td><span class="status-badge status-activo"><i class="fas fa-check-circle"></i> Activo</span></td>
                 <td>
                   <div class="action-buttons">
                     <button class="btn-action btn-view" title="Ver"><i class="fas fa-eye"></i></button>
@@ -272,51 +323,114 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-              <form class="needs-validation" id="addProductForm">
+              <form class="needs-validation" id="addProductForm" novalidate>
+                <!-- Nombre del Producto -->
                 <div class="row mb-3">
                   <div class="col-md-6">
-                    <label>Nombre del Producto</label>
-                    <input type="text" class="form-control" required placeholder="Ej: Laptop DELL XPS 13">
+                    <label class="form-label">Nombre del Producto <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="nombre" required placeholder="Ej: Laptop DELL XPS 13">
+                    <div class="invalid-feedback">El nombre es requerido</div>
                   </div>
                   <div class="col-md-6">
-                    <label>SKU</label>
-                    <input type="text" class="form-control" required placeholder="SKU-LP001">
+                    <label class="form-label">SKU Interno <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="sku_interno" required placeholder="SKU-LP001">
+                    <div class="invalid-feedback">El SKU es requerido</div>
                   </div>
                 </div>
+
+                <!-- Categoría y Marca -->
                 <div class="row mb-3">
                   <div class="col-md-6">
-                    <label>Categoría</label>
-                    <select class="form-select" required>
-                      <option>Laptops</option>
-                      <option>Móviles</option>
-                      <option>Tablets</option>
-                      <option>Accesorios</option>
+                    <label class="form-label">Categoría <span class="text-danger">*</span></label>
+                    <select class="form-select" name="categoria_id" required>
+                      <option value="">Selecciona una categoría</option>
+                      <!-- Las opciones se cargarán dinámicamente desde la BD -->
+                    </select>
+                    <div class="invalid-feedback">Selecciona una categoría</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Marca (Opcional)</label>
+                    <select class="form-select" name="marca_id">
+                      <option value="">Selecciona una marca</option>
+                      <!-- Las opciones se cargarán dinámicamente desde la BD -->
                     </select>
                   </div>
-                  <div class="col-md-6">
-                    <label>Precio</label>
-                    <input type="number" class="form-control" required placeholder="0.00" step="0.01">
-                  </div>
                 </div>
+
+                <!-- Unidad de Medida -->
                 <div class="row mb-3">
                   <div class="col-md-6">
-                    <label>Stock Inicial</label>
-                    <input type="number" class="form-control" required placeholder="0">
-                  </div>
-                  <div class="col-md-6">
-                    <label>Stock Mínimo</label>
-                    <input type="number" class="form-control" required placeholder="5">
+                    <label class="form-label">Unidad de Medida <span class="text-danger">*</span></label>
+                    <select class="form-select" name="unidad_id" required>
+                      <option value="">Selecciona una unidad</option>
+                      <!-- Las opciones se cargarán dinámicamente desde la BD -->
+                    </select>
+                    <div class="invalid-feedback">Selecciona una unidad</div>
                   </div>
                 </div>
+
+                <!-- Precios -->
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Precio de Compra <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" name="precio_compra_actual" required placeholder="0.00" step="0.01" min="0">
+                    <div class="invalid-feedback">Ingresa el precio de compra</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Precio de Venta <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" name="precio_venta_estandar" required placeholder="0.00" step="0.01" min="0">
+                    <div class="invalid-feedback">Ingresa el precio de venta</div>
+                  </div>
+                </div>
+
+                <!-- Stock -->
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Stock Actual <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" name="stock_actual" required placeholder="0" step="0.001" min="0">
+                    <div class="invalid-feedback">Ingresa el stock inicial</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Stock Mínimo <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" name="stock_minimo" required placeholder="5" step="0.001" min="0">
+                    <div class="invalid-feedback">Ingresa el stock mínimo</div>
+                  </div>
+                </div>
+
+                <!-- Imagen del Producto -->
                 <div class="mb-3">
-                  <label>Descripción</label>
-                  <textarea class="form-control" rows="3" placeholder="Descripción del producto..."></textarea>
+                  <label class="form-label">Imagen del Producto (Opcional)</label>
+                  <input type="file" class="form-control" name="imagen_file" id="imagenProducto" accept="image/*">
+                  <small class="form-text text-muted d-block mt-2">Formatos soportados: JPG, PNG, GIF (máx. 5MB)</small>
+                  <!-- Preview imagen -->
+                  <div id="imagenPreview" class="mt-3" style="display: none;">
+                    <small class="d-block mb-2">Vista previa:</small>
+                    <img id="previewImg" src="" alt="Imagen preview" style="max-height: 200px; border-radius: 4px; border: 1px solid #ddd; padding: 4px;">
+                  </div>
+                </div>
+
+                <!-- URL de Imagen Alternativa -->
+                <div class="mb-3">
+                  <label class="form-label text-muted">O URL de la Imagen (alternativa)</label>
+                  <input type="url" class="form-control" name="imagen_url" placeholder="https://ejemplo.com/imagen.jpg">
+                  <small class="form-text text-muted">Si cargas una imagen arriba, esta URL se ignorará</small>
+                </div>
+
+                <!-- Estado -->
+                <div class="mb-3">
+                  <label class="form-label">Estado</label>
+                  <select class="form-select" name="activo">
+                    <option value="1" selected>Activo</option>
+                    <option value="0">Inactivo</option>
+                  </select>
                 </div>
               </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-primary" id="saveProductBtn">Guardar Producto</button>
+              <button type="button" class="btn btn-primary" id="saveProductBtn">
+                <i class="fas fa-save me-2"></i>Guardar Producto
+              </button>
             </div>
           </div>
         </div>

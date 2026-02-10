@@ -1,9 +1,14 @@
+<?php 
+// Inicializar sesión y verificar slug
+include './init.php'; 
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - TechStore</title>
+  <title>Dashboard - <?php echo htmlspecialchars($empresa_nombre); ?></title>
+  <meta name="empresa-slug" content="<?php echo htmlspecialchars($empresa_slug); ?>"
   
   <!-- Bootstrap CSS -->
   <link href="/PuntoVenta/recursos/css/bootstrap.min.css" rel="stylesheet">
@@ -43,8 +48,19 @@
           </div>
           <div class="user-menu">
             <img src="https://via.placeholder.com/40" alt="Usuario" class="user-avatar">
-            <span class="user-name">Juan Pérez</span>
+            <span class="user-name"><?php echo htmlspecialchars($usuario_nombre); ?></span>
             <i class="fas fa-chevron-down"></i>
+            <div class="user-dropdown" style="display: none; position: absolute; top: 100%; right: 0; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 1000; min-width: 200px;">
+              <a href="<?php echo urlEmpresa('configuracion'); ?>" style="display: block; padding: 12px 16px; color: #333; text-decoration: none; border-bottom: 1px solid #eee;">
+                <i class="fas fa-cog"></i> Configuración
+              </a>
+              <a href="<?php echo urlEmpresa('perfil'); ?>" style="display: block; padding: 12px 16px; color: #333; text-decoration: none; border-bottom: 1px solid #eee;">
+                <i class="fas fa-user"></i> Mi Perfil
+              </a>
+              <a href="javascript:logout();" style="display: block; padding: 12px 16px; color: #dc3545; text-decoration: none;">
+                <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -52,8 +68,8 @@
       <!-- Page Header -->
       <div class="page-header">
         <div class="header-content">
-          <h1>Dashboard</h1>
-          <p class="text-muted">Bienvenido a tu panel de control</p>
+          <h1>Dashboard - <?php echo htmlspecialchars($empresa_nombre); ?></h1>
+          <p class="text-muted">Bienvenido <?php echo htmlspecialchars($usuario_nombre); ?></p>
         </div>
         <div class="header-buttons">
           <button class="btn btn-outline-secondary" data-bs-toggle="tooltip" title="Descargar reporte">
@@ -227,7 +243,7 @@
         <div class="activity-card">
           <div class="card-header">
             <h5>Actividad Reciente</h5>
-            <a href="/PuntoVenta/empresa/ventas.php" class="link-primary">Ver todo</a>
+            <a href="<?php echo urlEmpresa('ventas'); ?>" class="link-primary">Ver todo</a>
           </div>
           <div class="card-body">
             <div class="activity-list">
@@ -289,5 +305,48 @@
   <!-- Scripts -->
   <script src="../recursos/js/bootstrap.bundle.min.js"></script>
   <script src="./recursos/js/empresa.js"></script>
+  
+  <script>
+    /**
+     * Manejo del menú de usuario
+     */
+    document.querySelector('.user-menu').addEventListener('click', function(e) {
+      const dropdown = this.querySelector('.user-dropdown');
+      if (dropdown) {
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        e.stopPropagation();
+      }
+    });
+    
+    // Cerrar menú al hacer click en otra parte
+    document.addEventListener('click', function() {
+      const dropdown = document.querySelector('.user-dropdown');
+      if (dropdown) {
+        dropdown.style.display = 'none';
+      }
+    });
+    
+    /**
+     * Función logout
+     */
+    function logout() {
+      if (confirm('¿Deseas cerrar sesión exitosamente?')) {
+        // Hacer request POST a logout
+        fetch('/PuntoVenta/config/process_logout.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }).then(response => {
+          if (response.ok) {
+            window.location.href = '/PuntoVenta/index.php?logout=success';
+          }
+        }).catch(error => {
+          console.error('Error:', error);
+          window.location.href = '/PuntoVenta/index.php';
+        });
+      }
+    }
+  </script>
 </body>
 </html>

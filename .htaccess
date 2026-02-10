@@ -1,0 +1,35 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Permitir acceso a archivos y directorios reales
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Reescribir URLs de empresa: /empresa/[slug]/[pagina] → /empresa/[pagina].php?slug=[slug]
+    RewriteRule ^empresa/([a-z0-9-]+)/(.+?)(?:\.php)?/?$ empresa/$2.php?slug=$1 [QSA,L]
+    
+    # Reescribir URLs de admin
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^admin/([a-z0-9-]+)/?$ admin/$1.php [QSA,L]
+    
+</IfModule>
+
+# Seguridad básica
+<FilesMatch "\.php$">
+    <IfModule mod_headers.c>
+        Header set X-Content-Type-Options "nosniff"
+        Header set X-Frame-Options "DENY"
+    </IfModule>
+</FilesMatch>
+
+# Bloquear acceso directo a ciertos archivos
+<Files "connexion.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files ".htaccess">
+    Order allow,deny
+    Deny from all
+</Files>

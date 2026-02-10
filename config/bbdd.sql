@@ -5,9 +5,24 @@ CREATE DATABASE IF NOT EXISTS puntoventa
   DEFAULT COLLATE utf8mb4_unicode_ci;
 USE puntoventa;
 
+-- =============================================
+-- 1. CONFIGURACIÓN GLOBAL (SISTEMA)
+-- =============================================
+
+CREATE TABLE IF NOT EXISTS categorias_empresa (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL UNIQUE,
+    descripcion TEXT,
+    activo BOOLEAN DEFAULT TRUE
+) ENGINE=InnoDB;
+
+-- Carga inicial de rubros de negocio
+INSERT INTO categorias_empresa (nombre) VALUES 
+('Alimentos'), ('Moda'), ('Electronica'), ('Ferreteria'), 
+('Libros'), ('Farmacia'), ('Clinica'), ('Vehiculos');
 
 -- =============================================
--- 1. ESTRUCTURA DE EMPRESA Y PERSONALIZACIÓN
+-- 2. ESTRUCTURA DE EMPRESA Y PERSONALIZACIÓN
 -- =============================================
 
 CREATE TABLE IF NOT EXISTS empresas (
@@ -19,12 +34,13 @@ CREATE TABLE IF NOT EXISTS empresas (
     telefono VARCHAR(20),
     email_contacto VARCHAR(100),
     web VARCHAR(100),
+    categoria_empresa_id INT NOT NULL, -- Relación con categorías globales
     cuenta_bancaria VARCHAR(50),
     horario_atencion VARCHAR(255),
-    categoria_negocio ENUM('Alimentos', 'Moda', 'Electronica', 'Ferreteria', 'Libros', 'Farmacia', 'Clinica', 'Vehiculos') NOT NULL,
     estado ENUM('activo', 'inactivo', 'suspendido') DEFAULT 'activo',
-    eliminado_at TIMESTAMP NULL, -- Soft Delete
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    eliminado_at TIMESTAMP NULL,
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_empresa_categoria_global FOREIGN KEY (categoria_empresa_id) REFERENCES categorias_empresa(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS configuracion_apariencia (
@@ -38,7 +54,7 @@ CREATE TABLE IF NOT EXISTS configuracion_apariencia (
 ) ENGINE=InnoDB;
 
 -- =============================================
--- 2. GESTIÓN FISCAL Y UNIDADES
+-- 3. GESTIÓN FISCAL Y UNIDADES
 -- =============================================
 
 CREATE TABLE IF NOT EXISTS unidades_medida (
@@ -55,21 +71,21 @@ CREATE TABLE IF NOT EXISTS impuestos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     empresa_id INT NOT NULL,
     nombre VARCHAR(50) NOT NULL,
-    porcentaje DECIMAL(5, 2) NOT NULL, -- Ej: 15.00
+    porcentaje DECIMAL(5, 2) NOT NULL,
     activo BOOLEAN DEFAULT TRUE,
     CONSTRAINT fk_impuestos_empresa FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- =============================================
--- 3. CLASIFICACIÓN Y PRODUCTOS
+-- 4. CLASIFICACIÓN INTERNA Y PRODUCTOS
 -- =============================================
 
-CREATE TABLE IF NOT EXISTS categorias (
+CREATE TABLE IF NOT EXISTS categorias_producto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     empresa_id INT NOT NULL,
     nombre VARCHAR(100) NOT NULL,
     eliminado_at TIMESTAMP NULL,
-    CONSTRAINT fk_cat_empresa FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE
+    CONSTRAINT fk_cat_prod_empresa FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS marcas (
@@ -84,7 +100,7 @@ CREATE TABLE IF NOT EXISTS productos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     empresa_id INT NOT NULL,
     unidad_id INT NOT NULL,
-    categoria_id INT,
+    categoria_id INT NOT NULL, -- Ahora es obligatorio por regla de negocio
     marca_id INT,
     sku_interno VARCHAR(50) NOT NULL,
     nombre VARCHAR(200) NOT NULL,
@@ -96,14 +112,14 @@ CREATE TABLE IF NOT EXISTS productos (
     eliminado_at TIMESTAMP NULL,
     CONSTRAINT fk_prod_empresa FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE,
     CONSTRAINT fk_prod_unidad FOREIGN KEY (unidad_id) REFERENCES unidades_medida(id),
-    CONSTRAINT fk_prod_cat FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE SET NULL,
+    CONSTRAINT fk_prod_cat FOREIGN KEY (categoria_id) REFERENCES categorias_producto(id),
     CONSTRAINT fk_prod_marca FOREIGN KEY (marca_id) REFERENCES marcas(id) ON DELETE SET NULL,
     UNIQUE KEY ux_sku_empresa (empresa_id, sku_interno),
     INDEX (sku_interno)
 ) ENGINE=InnoDB;
 
 -- =============================================
--- 4. USUARIOS Y ENTIDADES
+-- 5. USUARIOS Y ENTIDADES
 -- =============================================
 
 CREATE TABLE IF NOT EXISTS usuarios (
@@ -124,13 +140,13 @@ CREATE TABLE IF NOT EXISTS entidades_externas (
     empresa_id INT NOT NULL,
     tipo ENUM('proveedor', 'cliente') NOT NULL,
     nombre_razon_social VARCHAR(150) NOT NULL,
-    identificacion VARCHAR(20), -- NIF, CIF, DNI
+    identificacion VARCHAR(20),
     eliminado_at TIMESTAMP NULL,
     CONSTRAINT fk_entidades_empresas FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- =============================================
--- 5. VENTAS, CAJA Y FACTURACIÓN
+-- 6. VENTAS, CAJA Y FACTURACIÓN
 -- =============================================
 
 CREATE TABLE IF NOT EXISTS cajas (
@@ -153,7 +169,7 @@ CREATE TABLE IF NOT EXISTS ventas (
     usuario_id INT,
     caja_id INT,
     cliente_id INT,
-    folio_venta VARCHAR(20), -- Referencia interna
+    folio_venta VARCHAR(20),
     total_neto DECIMAL(12, 2) NOT NULL DEFAULT 0.00,
     total_impuestos DECIMAL(12, 2) NOT NULL DEFAULT 0.00,
     total_general DECIMAL(12, 2) NOT NULL DEFAULT 0.00,
@@ -161,8 +177,7 @@ CREATE TABLE IF NOT EXISTS ventas (
     estado ENUM('presupuesto', 'completada', 'anulada') DEFAULT 'presupuesto',
     fecha_venta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_ventas_empresas FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE,
-    CONSTRAINT fk_ventas_cliente FOREIGN KEY (cliente_id) REFERENCES entidades_externas(id) ON DELETE SET NULL,
-    INDEX (folio_venta)
+    CONSTRAINT fk_ventas_cliente FOREIGN KEY (cliente_id) REFERENCES entidades_externas(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS venta_detalles (
@@ -172,7 +187,7 @@ CREATE TABLE IF NOT EXISTS venta_detalles (
     cantidad DECIMAL(12, 3) NOT NULL,
     precio_compra_momento DECIMAL(12, 2) NOT NULL,
     precio_unitario_venta DECIMAL(12, 2) NOT NULL,
-    impuesto_porcentaje_momento DECIMAL(5,2) NOT NULL DEFAULT 0.00, -- Snapshot fiscal
+    impuesto_porcentaje_momento DECIMAL(5,2) NOT NULL DEFAULT 0.00,
     subtotal_linea DECIMAL(12, 2) AS (cantidad * precio_unitario_venta) STORED,
     CONSTRAINT fk_vd_ventas FOREIGN KEY (venta_id) REFERENCES ventas(id) ON DELETE CASCADE,
     CONSTRAINT fk_vd_prod FOREIGN KEY (producto_id) REFERENCES productos(id)
@@ -192,7 +207,7 @@ CREATE TABLE IF NOT EXISTS facturas (
 ) ENGINE=InnoDB;
 
 -- =============================================
--- 6. TRAZABILIDAD Y AUDITORÍA
+-- 7. TRAZABILIDAD Y AUDITORÍA
 -- =============================================
 
 CREATE TABLE IF NOT EXISTS stock_movimientos (
@@ -207,31 +222,27 @@ CREATE TABLE IF NOT EXISTS stock_movimientos (
 ) ENGINE=InnoDB;
 
 -- =============================================
--- 7. LÓGICA DE NEGOCIO (TRIGGERS)
+-- 8. LÓGICA DE NEGOCIO (TRIGGERS)
 -- =============================================
 
 DELIMITER //
 
--- 1. Capturar costos e impuestos al insertar detalle
+-- 1. Capturar costos al insertar detalle
 CREATE TRIGGER tr_venta_detalles_bi
 BEFORE INSERT ON venta_detalles
 FOR EACH ROW
 BEGIN
     DECLARE v_costo DECIMAL(12,2);
-    DECLARE v_stock DECIMAL(12,3);
-
-    SELECT precio_compra_actual, stock_actual INTO v_costo, v_stock
-    FROM productos WHERE id = NEW.producto_id FOR UPDATE;
-
+    SELECT precio_compra_actual INTO v_costo
+    FROM productos WHERE id = NEW.producto_id;
     SET NEW.precio_compra_momento = v_costo;
 END //
 
--- 2. Actualizar totales de la cabecera automáticamente
+-- 2. Recalcular totales de venta
 CREATE TRIGGER tr_venta_detalles_ai
 AFTER INSERT ON venta_detalles
 FOR EACH ROW
 BEGIN
-    -- Recalcular totales en la cabecera
     UPDATE ventas 
     SET total_neto = (SELECT IFNULL(SUM(subtotal_linea), 0) FROM venta_detalles WHERE venta_id = NEW.venta_id),
         total_impuestos = (SELECT IFNULL(SUM(subtotal_linea * (impuesto_porcentaje_momento / 100)), 0) FROM venta_detalles WHERE venta_id = NEW.venta_id),
@@ -239,19 +250,18 @@ BEGIN
     WHERE id = NEW.venta_id;
 END //
 
--- 3. Descontar stock SOLO cuando la venta se marca como completada
+-- 3. Gestión de Stock al completar venta
 CREATE TRIGGER tr_ventas_bu
 BEFORE UPDATE ON ventas
 FOR EACH ROW
 BEGIN
-    -- Si el estado cambia de presupuesto a completada
     IF OLD.estado = 'presupuesto' AND NEW.estado = 'completada' THEN
-        -- Insertar movimientos de stock para cada producto de la venta
+        -- Movimientos de stock
         INSERT INTO stock_movimientos (producto_id, tipo_movimiento, cantidad, referencia_id, usuario_id)
         SELECT producto_id, 'salida_venta', cantidad, NEW.id, NEW.usuario_id
         FROM venta_detalles WHERE venta_id = NEW.id;
 
-        -- Actualizar el stock actual en productos
+        -- Actualización de stock físico
         UPDATE productos p
         INNER JOIN venta_detalles vd ON p.id = vd.producto_id
         SET p.stock_actual = p.stock_actual - vd.cantidad

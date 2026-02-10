@@ -247,22 +247,18 @@
                                 </select>
                                 <div class="invalid-feedback">Selecciona una venta válida.</div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Tipo Factura <span class="text-danger">*</span></label>
-                                <select class="form-select" name="tipo_factura" required>
-                                    <option value="">Seleccionar tipo...</option>
-                                    <option value="A">Factura A</option>
-                                    <option value="B">Factura B</option>
-                                    <option value="C">Factura C</option>
-                                </select>
-                                <div class="invalid-feedback">Selecciona un tipo válido.</div>
-                            </div>
+
                         </div>
                         <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Número Factura <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="numero_factura" placeholder="A-0001-00000001" required>
-                                <div class="invalid-feedback">El número de factura es requerido.</div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Serie <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="serie" placeholder="A" maxlength="10" required>
+                                <div class="invalid-feedback">La serie es requerida.</div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Correlativo <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" name="correlativo" placeholder="1" min="1" required>
+                                <div class="invalid-feedback">El correlativo es requerido.</div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Fecha Emisión <span class="text-danger">*</span></label>
@@ -271,20 +267,11 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">CUIT Empresa <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="cuit_empresa" placeholder="20-12345678-9" required>
-                                <div class="invalid-feedback">El CUIT es requerido.</div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">URL PDF</label>
+                                <input type="url" class="form-control" name="pdf_url" placeholder="https://..." >
+                                <div class="invalid-feedback">Ingresa una URL válida.</div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Punto de Venta <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="punto_venta" placeholder="0001" required>
-                                <div class="invalid-feedback">El punto de venta es requerido.</div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Observaciones</label>
-                            <textarea class="form-control" name="observaciones" rows="2" placeholder="Observaciones adicionales..."></textarea>
                         </div>
                     </form>
                 </div>

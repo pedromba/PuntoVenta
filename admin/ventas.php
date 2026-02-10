@@ -304,11 +304,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Observaciones</label>
-                            <textarea class="form-control" name="observaciones" rows="3" placeholder="Detalles adicionales..."></textarea>
-                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">

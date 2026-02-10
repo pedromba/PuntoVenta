@@ -300,30 +300,100 @@ function setupSubmitHandlers() {
 }
 
 function handleLoginSubmit(e) {
-    if (!document.getElementById('loginForm').checkValidity()) {
-        e.preventDefault();
+    e.preventDefault(); // Prevenir envío tradicional del formulario
+    
+    const loginForm = document.getElementById('loginForm');
+    if (!loginForm.checkValidity()) {
         return;
     }
 
     const submitBtn = document.getElementById('submitBtn');
-    submitBtn.disabled = true;
-
     const btnText = submitBtn.querySelector('.btn-text');
     const btnLoading = submitBtn.querySelector('.btn-loading');
 
+    // Deshabilitar botón y mostrar loading
+    submitBtn.disabled = true;
     if (btnText && btnLoading) {
         btnText.classList.add('d-none');
         btnLoading.classList.remove('d-none');
     }
 
-    // Failsafe: re-habilitar después de 3 segundos
-    setTimeout(() => {
+    // Obtener datos del formulario
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const rol = document.querySelector('input[name="rol"]:checked')?.value || 'empresa';
+
+    // Preparar datos para envío
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('rol', rol);
+
+    // Enviar request al servidor
+    fetch('/PuntoVenta/config/process_login.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // ✅ LOGIN EXITOSO - Redirigir a dashboard con slug
+            showNotification('success', data.message || 'Sesión iniciada correctamente');
+            
+            // Esperar 1 segundo antes de redirigir
+            setTimeout(() => {
+                window.location.href = data.redirect;
+            }, 1000);
+        } else {
+            // ❌ LOGIN FALLIDO - Mostrar error
+            showNotification('error', data.message || 'Error al iniciar sesión');
+            
+            // Re-habilitar botón
+            submitBtn.disabled = false;
+            if (btnText && btnLoading) {
+                btnText.classList.remove('d-none');
+                btnLoading.classList.add('d-none');
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showNotification('error', 'Error de conexión. Intenta de nuevo.');
+        
+        // Re-habilitar botón
         submitBtn.disabled = false;
         if (btnText && btnLoading) {
             btnText.classList.remove('d-none');
             btnLoading.classList.add('d-none');
         }
-    }, 3000);
+    });
+}
+
+/**
+ * Mostrar notificaciones al usuario
+ */
+function showNotification(type, message) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type === 'success' ? 'success' : 'danger'} alert-dismissible fade show`;
+    alertDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        min-width: 300px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    `;
+    alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    document.body.appendChild(alertDiv);
+    
+    // Auto-cerrar después de 5 segundos
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 5000);
 }
 
 function handleRegisterSubmit(e) {
