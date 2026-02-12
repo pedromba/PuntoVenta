@@ -321,32 +321,73 @@ function handleLoginSubmit(e) {
     // Obtener datos del formulario
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const rol = document.querySelector('input[name="rol"]:checked')?.value || 'empresa';
 
     // Preparar datos para envío
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
-    formData.append('rol', rol);
 
     // Enviar request al servidor
-    fetch('/PuntoVenta/config/process_login.php', {
+    console.log('🔄 Enviando solicitud de login...');
+    
+    fetch('recursos/php/Login.php', {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('📡 Respuesta recibida:', response.status);
+        return response.text().then(text => {
+            console.log('📄 Texto de respuesta:', text);
+            try {
+                return JSON.parse(text);
+            } catch (e) {
+                console.error('❌ Error parseando JSON:', e);
+                console.error('Texto recibido:', text);
+                throw new Error('Respuesta del servidor no es JSON válido');
+            }
+        });
+    })
     .then(data => {
-        if (data.success) {
-            // ✅ LOGIN EXITOSO - Redirigir a dashboard con slug
-            showNotification('success', data.message || 'Sesión iniciada correctamente');
-            
-            // Esperar 1 segundo antes de redirigir
-            setTimeout(() => {
-                window.location.href = data.redirect;
-            }, 1000);
+        console.log('✅ Datos parseados:', data);
+        
+        if (data.status) {
+            // Verificar si requiere verificación 2FA
+            if (data.requiere_verificacion) {
+                // 🔐 REQUIERE VERIFICACIÓN 2FA
+                console.log('🔐 Requiere verificación 2FA');
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Verificación requerida',
+                    text: data.message,
+                    confirmButtonText: 'Continuar',
+                    allowOutsideClick: false
+                }).then(() => {
+                    // Redirigir a página de verificación
+                    console.log('↪️ Redirigiendo a verificar-codigo.php');
+                    window.location.href = 'verificar-codigo.php';
+                });
+            } else {
+                // ✅ LOGIN EXITOSO SIN 2FA (Fallback por si se desactiva 2FA)
+                console.log('✅ Login exitoso sin 2FA');
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Bienvenido!',
+                    text: data.message || 'Sesión iniciada correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    window.location.href = data.redirect;
+                });
+            }
         } else {
             // ❌ LOGIN FALLIDO - Mostrar error
-            showNotification('error', data.message || 'Error al iniciar sesión');
+            console.log('❌ Login fallido:', data.message);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error de autenticación',
+                text: data.message || 'Credenciales incorrectas',
+                confirmButtonText: 'Intentar de nuevo'
+            });
             
             // Re-habilitar botón
             submitBtn.disabled = false;
@@ -357,8 +398,14 @@ function handleLoginSubmit(e) {
         }
     })
     .catch(error => {
-        console.error('Error:', error);
-        showNotification('error', 'Error de conexión. Intenta de nuevo.');
+        console.error('❌ Error capturado:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de conexión',
+            text: 'No se pudo conectar con el servidor: ' + error.message,
+            confirmButtonText: 'OK',
+            footer: '<small>Revisa la consola (F12) para más detalles</small>'
+        });
         
         // Re-habilitar botón
         submitBtn.disabled = false;

@@ -1,27 +1,28 @@
-
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>PuntoVenta - Login & Registro</title>
-    
+
     <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+    <link href="./recursos/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link rel="stylesheet" href="./recursos/css/all.css">
+
     <!-- Google Fonts - Sora -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- CSS Personalizado -->
     <link rel="stylesheet" href="./recursos/css/estilosLogin.css">
 </head>
+
 <body>
     <div class="container-fluid login-container">
         <div class="row">
@@ -41,7 +42,7 @@
                     <div class="description-section">
                         <h3 class="section-title">Bienvenido a tu solución comercial</h3>
                         <p class="section-text">
-                            Gestiona tu negocio de forma eficiente con nuestro sistema de punto de venta integral. 
+                            Gestiona tu negocio de forma eficiente con nuestro sistema de punto de venta integral.
                             Controla inventario, ventas y reportes en tiempo real.
                         </p>
                     </div>
@@ -104,38 +105,10 @@
                 <div class="login-wrapper observe-fade">
                     <!-- Card del Formulario -->
                     <div class="login-card">
-                        <!-- Tabs Navigation -->
-                        <ul class="nav nav-pills form-tabs" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button 
-                                    class="nav-link active" 
-                                    id="tab-login" 
-                                    data-bs-toggle="tab" 
-                                    data-bs-target="#content-login" 
-                                    type="button" 
-                                    role="tab"
-                                >
-                                    <i class="fas fa-sign-in-alt me-2"></i>Acceso
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button 
-                                    class="nav-link" 
-                                    id="tab-register" 
-                                    data-bs-toggle="tab" 
-                                    data-bs-target="#content-register" 
-                                    type="button" 
-                                    role="tab"
-                                >
-                                    <i class="fas fa-building me-2"></i>Nueva Empresa
-                                </button>
-                            </li>
-                        </ul>
-
-                        <!-- Tab Content -->
-                        <div class="tab-content">
-                            <!-- LOGIN TAB -->
-                            <div class="tab-pane fade show active" id="content-login" role="tabpanel">
+                        <!-- Contenido del Login -->
+                        <div>
+                            <!-- LOGIN FORM -->
+                            <div>
                                 <!-- Header -->
                                 <div class="login-header">
                                     <div class="login-icon">
@@ -161,14 +134,13 @@
                                         <label class="form-label" for="email">
                                             <i class="fas fa-envelope me-2"></i>Correo Electrónico
                                         </label>
-                                        <input 
-                                            type="email" 
-                                            class="form-control" 
-                                            id="email" 
-                                            name="email" 
-                                            placeholder="tu@empresa.com" 
-                                            required
-                                        >
+                                        <input
+                                            type="email"
+                                            class="form-control"
+                                            id="email"
+                                            name="email"
+                                            placeholder="tu@empresa.com"
+                                            required>
                                         <div class="invalid-feedback">Por favor ingresa un correo válido</div>
                                     </div>
 
@@ -178,15 +150,14 @@
                                             <i class="fas fa-lock me-2"></i>Contraseña
                                         </label>
                                         <div class="password-input-group">
-                                            <input 
-                                                type="password" 
-                                                class="form-control" 
-                                                id="password" 
-                                                name="password" 
-                                                placeholder="••••••••" 
+                                            <input
+                                                type="password"
+                                                class="form-control"
+                                                id="password"
+                                                name="password"
+                                                placeholder="••••••••"
                                                 required
-                                                minlength="6"
-                                            >
+                                                minlength="6">
                                             <button type="button" class="btn-toggle-password" id="togglePassword">
                                                 <i class="fas fa-eye"></i>
                                             </button>
@@ -203,269 +174,27 @@
 
                                     <!-- Remember Me -->
                                     <div class="form-check remember-check">
-                                        <input 
-                                            type="checkbox" 
-                                            class="form-check-input" 
-                                            id="rememberMe" 
-                                            name="rememberMe"
-                                        >
+                                        <input
+                                            type="checkbox"
+                                            class="form-check-input"
+                                            id="rememberMe"
+                                            name="rememberMe">
                                         <label class="form-check-label" for="rememberMe">
                                             Recuérdame en este dispositivo
                                         </label>
                                     </div>
 
-                                    <!-- Rol de Acceso -->
-                                    <div class="form-group mb-4">
-                                        <label class="form-label">
-                                            <i class="fas fa-user-shield me-2"></i>Tipo de Acceso
-                                        </label>
-                                        <div class="role-selector">
-                                            <label class="role-option">
-                                                <input type="radio" name="rol" value="empresa" checked>
-                                                <span>
-                                                    <i class="fas fa-store"></i>
-                                                    <strong>Empresa</strong>
-                                                    <small>Acceso a tu panel de negocio</small>
-                                                </span>
-                                            </label>
-                                            <label class="role-option">
-                                                <input type="radio" name="rol" value="admin">
-                                                <span>
-                                                    <i class="fas fa-user-tie"></i>
-                                                    <strong>Administrador</strong>
-                                                    <small>Gestión del sistema</small>
-                                                </span>
-                                            </label>
-                                        </div>
-                                    </div>
-
                                     <!-- Submit Button -->
-                                    <button 
-                                        type="submit" 
+                                    <button
+                                        type="submit"
                                         class="btn btn-submit btn-lg w-100"
-                                        id="submitBtn"
-                                    >
+                                        id="submitBtn">
                                         <span class="btn-text">
                                             <i class="fas fa-sign-in-alt me-2"></i>Acceder
                                         </span>
                                         <span class="btn-loading d-none">
                                             <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
                                             Iniciando sesión...
-                                        </span>
-                                    </button>
-                                </form>
-                            </div>
-
-                            <!-- REGISTER TAB -->
-                            <div class="tab-pane fade" id="content-register" role="tabpanel">
-                                <!-- Header -->
-                                <div class="login-header">
-                                    <div class="login-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
-                                        <i class="fas fa-building"></i>
-                                    </div>
-                                    <h2>Crear Nueva Empresa</h2>
-                                    <p>Registra tu empresa en nuestro sistema</p>
-                                </div>
-
-                                <!-- Alerta de Error Registro -->
-                                <div id="alertContainerRegister" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-exclamation-circle me-2"></i>
-                                        <span id="errorMessageRegister"></span>
-                                    </div>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                </div>
-
-                                <!-- Formulario de Registro -->
-                                <form id="registerForm" action="config/process_register.php" method="POST" class="needs-validation" novalidate>
-                                    <!-- Nombre Comercial -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="company-name">
-                                            <i class="fas fa-store me-2"></i>Nombre Comercial
-                                        </label>
-                                        <input 
-                                            type="text" 
-                                            class="form-control register-input" 
-                                            id="company-name" 
-                                            name="nombre_comercial" 
-                                            placeholder="Ej: TechStore S.A." 
-                                            required
-                                        >
-                                        <div class="invalid-feedback">El nombre comercial es requerido</div>
-                                    </div>
-
-                                    <!-- NIF/CIF -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="nif-cif">
-                                            <i class="fas fa-id-card me-2"></i>NIF/CIF
-                                        </label>
-                                        <input 
-                                            type="text" 
-                                            class="form-control register-input" 
-                                            id="nif-cif" 
-                                            name="nif_cif" 
-                                            placeholder="Ej: A12345678" 
-                                            required
-                                        >
-                                        <div class="invalid-feedback">El NIF/CIF es requerido</div>
-                                    </div>
-
-                                    <!-- Email Contacto -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="contact-email">
-                                            <i class="fas fa-envelope me-2"></i>Correo de Contacto
-                                        </label>
-                                        <input 
-                                            type="email" 
-                                            class="form-control register-input" 
-                                            id="contact-email" 
-                                            name="email_contacto" 
-                                            placeholder="contacto@empresa.com" 
-                                            required
-                                        >
-                                        <div class="invalid-feedback">Ingresa un correo válido</div>
-                                    </div>
-
-                                    <!-- Teléfono -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="phone">
-                                            <i class="fas fa-phone me-2"></i>Teléfono (Opcional)
-                                        </label>
-                                        <input 
-                                            type="tel" 
-                                            class="form-control register-input" 
-                                            id="phone" 
-                                            name="telefono" 
-                                            placeholder="+240 222 123456"
-                                        >
-                                        <small class="text-muted">
-                                            <i class="fas fa-info-circle me-1"></i>Formato: +240 222/555 XXXXXX
-                                        </small>
-                                    </div>
-
-                                    <!-- Categoría Negocio -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="category">
-                                            <i class="fas fa-layer-group me-2"></i>Categoría de Negocio
-                                        </label>
-                                        <select 
-                                            class="form-select register-input" 
-                                            id="category" 
-                                            name="categoria_empresa_id" 
-                                            required
-                                        >
-                                            <option value="">Selecciona una categoría</option>
-                                            <option value="1">Alimentos</option>
-                                            <option value="2">Moda</option>
-                                            <option value="3">Electrónica</option>
-                                            <option value="4">Ferretería</option>
-                                            <option value="5">Libros</option>
-                                            <option value="6">Farmacia</option>
-                                            <option value="7">Clínica</option>
-                                            <option value="8">Vehículos</option>
-                                        </select>
-                                        <div class="invalid-feedback">Selecciona una categoría</div>
-                                    </div>
-
-                                    <!-- Dirección -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="address">
-                                            <i class="fas fa-map-marker-alt me-2"></i>Dirección (Opcional)
-                                        </label>
-                                        <input 
-                                            type="text" 
-                                            class="form-control register-input" 
-                                            id="address" 
-                                            name="direccion" 
-                                            placeholder="Calle 123, Piso 4"
-                                        >
-                                    </div>
-
-                                    <!-- Sitio Web -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="website">
-                                            <i class="fas fa-globe me-2"></i>Sitio Web (Opcional)
-                                        </label>
-                                        <input 
-                                            type="url" 
-                                            class="form-control register-input" 
-                                            id="website" 
-                                            name="web" 
-                                            placeholder="https://www.empresa.com"
-                                        >
-                                    </div>
-
-                                    <!-- Horario de Atención -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="hours">
-                                            <i class="fas fa-clock me-2"></i>Horario de Atención (Opcional)
-                                        </label>
-                                        <input 
-                                            type="text" 
-                                            class="form-control register-input" 
-                                            id="hours" 
-                                            name="horario_atencion" 
-                                            placeholder="Lunes a Viernes 9:00 - 18:00"
-                                        >
-                                    </div>
-
-                                    <!-- Cuenta Bancaria -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="bank">
-                                            <i class="fas fa-university me-2"></i>Cuenta Bancaria (Opcional)
-                                        </label>
-                                        <input 
-                                            type="text" 
-                                            class="form-control register-input" 
-                                            id="bank" 
-                                            name="cuenta_bancaria" 
-                                            placeholder="ES91 2100 0418 45023847"
-                                        >
-                                    </div>
-
-                                    <!-- Alert Info -->
-                                    <div class="alert alert-info alert-dismissible fade show mb-3" role="alert">
-                                        <div class="d-flex align-items-start">
-                                            <i class="fas fa-lightbulb me-3 mt-1"></i>
-                                            <div>
-                                                <strong>Información Importante:</strong>
-                                                <p class="mb-0 mt-1 small">
-                                                    Se enviará un correo de confirmación a la dirección ingresada. 
-                                                    El registro estará completo después de verificar tu correo.
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                    </div>
-
-                                    <!-- Terms -->
-                                    <div class="form-check mb-3">
-                                        <input 
-                                            type="checkbox" 
-                                            class="form-check-input" 
-                                            id="terms" 
-                                            name="terms" 
-                                            required
-                                        >
-                                        <label class="form-check-label" for="terms">
-                                            Acepto los <a href="#" class="link-forgot-password">términos de servicio</a> 
-                                            y la <a href="#" class="link-forgot-password">política de privacidad</a>
-                                        </label>
-                                        <div class="invalid-feedback">Debes aceptar los términos y condiciones</div>
-                                    </div>
-
-                                    <!-- Submit Button -->
-                                    <button 
-                                        type="submit" 
-                                        class="btn btn-submit btn-success btn-lg w-100"
-                                        id="submitBtnRegister"
-                                    >
-                                        <span class="btn-text">
-                                            <i class="fas fa-check-circle me-2"></i>Registrar Empresa
-                                        </span>
-                                        <span class="btn-loading d-none">
-                                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                                            Registrando...
                                         </span>
                                     </button>
                                 </form>
@@ -494,8 +223,12 @@
 
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
+    <!-- SweetAlert2 -->
+    <script src="./recursos/js/sweetalert2.all.js"></script>
+
     <!-- JS Personalizado -->
     <script src="./recursos/js/login.js"></script>
 </body>
+
 </html>

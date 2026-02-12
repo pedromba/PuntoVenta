@@ -1,19 +1,24 @@
-<?php 
-// Inicializar sesión y verificar slug
-include './init.php'; 
+<?php
+session_start();
+
+// Verificar autenticación
+if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
+    header('Location: ../index.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - <?php echo htmlspecialchars($empresa_nombre); ?></title>
-  <meta name="empresa-slug" content="<?php echo htmlspecialchars($empresa_slug); ?>"
+  <title>Dashboard - panel principal</title>
+  <meta name="empresa-slug" content="prueba-empresa">
   
   <!-- Bootstrap CSS -->
-  <link href="/PuntoVenta/recursos/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../recursos/css/all.css">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
@@ -29,6 +34,19 @@ include './init.php';
 
     <!-- Main Content -->
     <div class="main-content">
+      <!-- Mensaje de Éxito (Autenticación Completa) -->
+      <div style="margin: 20px; padding: 20px; background: #d1fae5; border-left: 4px solid #10b981; border-radius: 12px; display: flex; align-items: center; gap: 15px;">
+        <div style="font-size: 32px;">✅</div>
+        <div>
+          <h5 style="margin: 0 0 5px 0; color: #065f46; font-weight: 600;">
+            ¡Bienvenido, <?php echo htmlspecialchars($_SESSION['nombre']); ?>!
+          </h5>
+          <p style="margin: 0; color: #065f46; font-size: 14px;">
+            Autenticación 2FA completada exitosamente. Accediste al panel de <strong>Empresa</strong>
+          </p>
+        </div>
+      </div>
+      
       <!-- Topbar -->
       <div class="topbar">
         <div class="topbar-left">
@@ -48,13 +66,13 @@ include './init.php';
           </div>
           <div class="user-menu">
             <img src="https://via.placeholder.com/40" alt="Usuario" class="user-avatar">
-            <span class="user-name"><?php echo htmlspecialchars($usuario_nombre); ?></span>
+            <span class="user-name">Pedro Mba</span>
             <i class="fas fa-chevron-down"></i>
             <div class="user-dropdown" style="display: none; position: absolute; top: 100%; right: 0; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 1000; min-width: 200px;">
-              <a href="<?php echo urlEmpresa('configuracion'); ?>" style="display: block; padding: 12px 16px; color: #333; text-decoration: none; border-bottom: 1px solid #eee;">
+              <a href="" style="display: block; padding: 12px 16px; color: #333; text-decoration: none; border-bottom: 1px solid #eee;">
                 <i class="fas fa-cog"></i> Configuración
               </a>
-              <a href="<?php echo urlEmpresa('perfil'); ?>" style="display: block; padding: 12px 16px; color: #333; text-decoration: none; border-bottom: 1px solid #eee;">
+              <a href="" style="display: block; padding: 12px 16px; color: #333; text-decoration: none; border-bottom: 1px solid #eee;">
                 <i class="fas fa-user"></i> Mi Perfil
               </a>
               <a href="javascript:logout();" style="display: block; padding: 12px 16px; color: #dc3545; text-decoration: none;">
@@ -65,11 +83,12 @@ include './init.php';
         </div>
       </div>
 
+
       <!-- Page Header -->
       <div class="page-header">
         <div class="header-content">
-          <h1>Dashboard - <?php echo htmlspecialchars($empresa_nombre); ?></h1>
-          <p class="text-muted">Bienvenido <?php echo htmlspecialchars($usuario_nombre); ?></p>
+          <h1>Dashboard - panel principal</h1>
+          <p class="text-muted">Bienvenido Pedro Mba</p>
         </div>
         <div class="header-buttons">
           <button class="btn btn-outline-secondary" data-bs-toggle="tooltip" title="Descargar reporte">
@@ -123,7 +142,7 @@ include './init.php';
           <div class="kpi-body">
             <div class="kpi-value">89</div>
             <div class="kpi-change positive">
-              <i class="fas fa-arrow-up"></i> 5 nuevos hoje
+              <i class="fas fa-arrow-up"></i> 5 nuevos hoy
             </div>
           </div>
         </div>

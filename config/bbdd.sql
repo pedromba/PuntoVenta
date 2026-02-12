@@ -1,13 +1,17 @@
--- Active: 1769673830758@@127.0.0.1@3306
+-- ======================================================
+-- BASE DE DATOS: PUNTODEVENTA (Versión Optimizada 2026)
+-- ======================================================
 DROP DATABASE IF EXISTS puntoventa;
+
 CREATE DATABASE IF NOT EXISTS puntoventa
   DEFAULT CHARACTER SET utf8mb4
   DEFAULT COLLATE utf8mb4_unicode_ci;
+
 USE puntoventa;
 
--- =============================================
--- 1. CONFIGURACIÓN GLOBAL (SISTEMA)
--- =============================================
+-- ======================================================
+-- 1. ESTRUCTURAS GLOBALES (SISTEMA)
+-- ======================================================
 
 CREATE TABLE IF NOT EXISTS categorias_empresa (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -16,14 +20,16 @@ CREATE TABLE IF NOT EXISTS categorias_empresa (
     activo BOOLEAN DEFAULT TRUE
 ) ENGINE=InnoDB;
 
--- Carga inicial de rubros de negocio
-INSERT INTO categorias_empresa (nombre) VALUES 
-('Alimentos'), ('Moda'), ('Electronica'), ('Ferreteria'), 
-('Libros'), ('Farmacia'), ('Clinica'), ('Vehiculos');
+CREATE TABLE IF NOT EXISTS roles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL UNIQUE,
+    descripcion TEXT,
+    activo ENUM('si', 'no') DEFAULT 'si'
+) ENGINE=InnoDB;
 
--- =============================================
+-- ======================================================
 -- 2. ESTRUCTURA DE EMPRESA Y PERSONALIZACIÓN
--- =============================================
+-- ======================================================
 
 CREATE TABLE IF NOT EXISTS empresas (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -34,7 +40,7 @@ CREATE TABLE IF NOT EXISTS empresas (
     telefono VARCHAR(20),
     email_contacto VARCHAR(100),
     web VARCHAR(100),
-    categoria_empresa_id INT NOT NULL, -- Relación con categorías globales
+    categoria_empresa_id INT NOT NULL,
     cuenta_bancaria VARCHAR(50),
     horario_atencion VARCHAR(255),
     estado ENUM('activo', 'inactivo', 'suspendido') DEFAULT 'activo',
@@ -53,9 +59,9 @@ CREATE TABLE IF NOT EXISTS configuracion_apariencia (
     CONSTRAINT fk_apariencia_empresa FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- =============================================
--- 3. GESTIÓN FISCAL Y UNIDADES
--- =============================================
+-- ======================================================
+-- 3. GESTIÓN FISCAL, UNIDADES Y PRODUCTOS
+-- ======================================================
 
 CREATE TABLE IF NOT EXISTS unidades_medida (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -75,10 +81,6 @@ CREATE TABLE IF NOT EXISTS impuestos (
     activo BOOLEAN DEFAULT TRUE,
     CONSTRAINT fk_impuestos_empresa FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
-
--- =============================================
--- 4. CLASIFICACIÓN INTERNA Y PRODUCTOS
--- =============================================
 
 CREATE TABLE IF NOT EXISTS categorias_producto (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -100,7 +102,7 @@ CREATE TABLE IF NOT EXISTS productos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     empresa_id INT NOT NULL,
     unidad_id INT NOT NULL,
-    categoria_id INT NOT NULL, -- Ahora es obligatorio por regla de negocio
+    categoria_id INT NOT NULL,
     marca_id INT,
     sku_interno VARCHAR(50) NOT NULL,
     nombre VARCHAR(200) NOT NULL,
@@ -118,9 +120,9 @@ CREATE TABLE IF NOT EXISTS productos (
     INDEX (sku_interno)
 ) ENGINE=InnoDB;
 
--- =============================================
--- 5. USUARIOS Y ENTIDADES
--- =============================================
+-- ======================================================
+-- 4. USUARIOS Y SEGURIDAD (2FA)
+-- ======================================================
 
 CREATE TABLE IF NOT EXISTS usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -128,11 +130,42 @@ CREATE TABLE IF NOT EXISTS usuarios (
     nombre VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
-    rol ENUM('superadmin', 'admin', 'finanzas', 'almacen', 'vendedor') DEFAULT 'vendedor',
-    activo BOOLEAN DEFAULT TRUE,
-    eliminado_at TIMESTAMP NULL,
+    activo ENUM('si', 'no') DEFAULT 'si',
+    es_superadmin BOOLEAN DEFAULT FALSE,
+    ultimo_login TIMESTAMP NULL,
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_usuarios_empresas FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE,
     UNIQUE KEY ux_empresa_email (empresa_id, email)
+) ENGINE=InnoDB;
+
+-- NUEVA: Gestión de códigos de verificación por email
+CREATE TABLE IF NOT EXISTS verificaciones_login (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    codigo_otp VARCHAR(255) NOT NULL, -- Código hasheado
+    expira_at TIMESTAMP NOT NULL,
+    usado BOOLEAN DEFAULT FALSE,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_verif_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    INDEX (usuario_id, usado)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS permisos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    rol_id INT NOT NULL,
+    nombre_permiso VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    CONSTRAINT fk_permisos_rol FOREIGN KEY (rol_id) REFERENCES roles(id) ON DELETE CASCADE,
+    UNIQUE KEY ux_rol_permiso (rol_id, nombre_permiso)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS asignacionRol (
+    usuario_id INT NOT NULL,
+    rol_id INT NOT NULL,
+    fecha_asignacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (usuario_id, rol_id),
+    CONSTRAINT fk_asig_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    CONSTRAINT fk_asig_rol FOREIGN KEY (rol_id) REFERENCES roles(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS entidades_externas (
@@ -142,12 +175,13 @@ CREATE TABLE IF NOT EXISTS entidades_externas (
     nombre_razon_social VARCHAR(150) NOT NULL,
     identificacion VARCHAR(20),
     eliminado_at TIMESTAMP NULL,
-    CONSTRAINT fk_entidades_empresas FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE
+    CONSTRAINT fk_entidades_empresas FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE,
+    INDEX (nombre_razon_social)
 ) ENGINE=InnoDB;
 
--- =============================================
--- 6. VENTAS, CAJA Y FACTURACIÓN
--- =============================================
+-- ======================================================
+-- 5. VENTAS, CAJA Y FACTURACIÓN
+-- ======================================================
 
 CREATE TABLE IF NOT EXISTS cajas (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -167,7 +201,7 @@ CREATE TABLE IF NOT EXISTS ventas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     empresa_id INT NOT NULL,
     usuario_id INT,
-    caja_id INT,
+    caja_id INT,        
     cliente_id INT,
     folio_venta VARCHAR(20),
     total_neto DECIMAL(12, 2) NOT NULL DEFAULT 0.00,
@@ -177,7 +211,9 @@ CREATE TABLE IF NOT EXISTS ventas (
     estado ENUM('presupuesto', 'completada', 'anulada') DEFAULT 'presupuesto',
     fecha_venta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_ventas_empresas FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE,
-    CONSTRAINT fk_ventas_cliente FOREIGN KEY (cliente_id) REFERENCES entidades_externas(id) ON DELETE SET NULL
+    CONSTRAINT fk_ventas_cliente FOREIGN KEY (cliente_id) REFERENCES entidades_externas(id) ON DELETE SET NULL,
+    INDEX (folio_venta),
+    INDEX (fecha_venta)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS venta_detalles (
@@ -206,10 +242,6 @@ CREATE TABLE IF NOT EXISTS facturas (
     CONSTRAINT fk_factura_venta FOREIGN KEY (venta_id) REFERENCES ventas(id)
 ) ENGINE=InnoDB;
 
--- =============================================
--- 7. TRAZABILIDAD Y AUDITORÍA
--- =============================================
-
 CREATE TABLE IF NOT EXISTS stock_movimientos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     producto_id INT NOT NULL,
@@ -221,13 +253,30 @@ CREATE TABLE IF NOT EXISTS stock_movimientos (
     CONSTRAINT fk_stock_prod FOREIGN KEY (producto_id) REFERENCES productos(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- =============================================
--- 8. LÓGICA DE NEGOCIO (TRIGGERS)
--- =============================================
+-- ======================================================
+-- 6. VISTAS DE APOYO (REPORTE RÁPIDO)
+-- ======================================================
+
+CREATE VIEW vista_reporte_diario AS
+SELECT 
+    e.nombre_comercial AS empresa,
+    u.nombre AS vendedor,
+    v.folio_venta,
+    v.total_general,
+    v.metodo_pago,
+    v.fecha_venta
+FROM ventas v
+JOIN empresas e ON v.empresa_id = e.id
+JOIN usuarios u ON v.usuario_id = u.id
+WHERE v.estado = 'completada' AND DATE(v.fecha_venta) = CURDATE();
+
+-- ======================================================
+-- 7. DISPARADORES (TRIGGERS)
+-- ======================================================
 
 DELIMITER //
 
--- 1. Capturar costos al insertar detalle
+-- Captura el costo actual antes de insertar el detalle
 CREATE TRIGGER tr_venta_detalles_bi
 BEFORE INSERT ON venta_detalles
 FOR EACH ROW
@@ -238,7 +287,7 @@ BEGIN
     SET NEW.precio_compra_momento = v_costo;
 END //
 
--- 2. Recalcular totales de venta
+-- Recalcula totales de la venta automáticamente
 CREATE TRIGGER tr_venta_detalles_ai
 AFTER INSERT ON venta_detalles
 FOR EACH ROW
@@ -250,18 +299,18 @@ BEGIN
     WHERE id = NEW.venta_id;
 END //
 
--- 3. Gestión de Stock al completar venta
+-- Actualiza stock solo cuando la venta pasa a 'completada'
 CREATE TRIGGER tr_ventas_bu
 BEFORE UPDATE ON ventas
 FOR EACH ROW
 BEGIN
     IF OLD.estado = 'presupuesto' AND NEW.estado = 'completada' THEN
-        -- Movimientos de stock
+        -- Registrar movimientos de stock
         INSERT INTO stock_movimientos (producto_id, tipo_movimiento, cantidad, referencia_id, usuario_id)
         SELECT producto_id, 'salida_venta', cantidad, NEW.id, NEW.usuario_id
         FROM venta_detalles WHERE venta_id = NEW.id;
 
-        -- Actualización de stock físico
+        -- Descontar del inventario
         UPDATE productos p
         INNER JOIN venta_detalles vd ON p.id = vd.producto_id
         SET p.stock_actual = p.stock_actual - vd.cantidad
@@ -270,3 +319,25 @@ BEGIN
 END //
 
 DELIMITER ;
+
+-- ======================================================
+-- 8. CARGA DE DATOS INICIALES
+-- ======================================================
+
+INSERT INTO categorias_empresa (nombre) VALUES 
+('Alimentos'), ('Moda'), ('Electronica'), ('Ferreteria'), ('Farmacia');
+
+INSERT INTO roles (nombre, descripcion) VALUES 
+('Administrador', 'Acceso total'),
+('Vendedor', 'Acceso a ventas y caja'),
+('Inventario', 'Gestión de productos');
+
+INSERT INTO empresas (nombre_comercial, nif_cif, categoria_empresa_id) 
+VALUES ('Empresa Demo S.A.', 'NIF-987654321', 1);
+
+-- Contraseña hasheada para '11223344' usando password_hash() de PHP con PASSWORD_DEFAULT (bcrypt)
+INSERT INTO usuarios (empresa_id, nombre, email, password_hash, activo) VALUES 
+(1, 'Admin Principal', 'pmba098@gmail.com', '$2y$10$MQmSDI.W6aqsnhMgrwSZOudHMekCDFKORWDsh6B4.lHbEWA72KPLS', 'si'),
+(1, 'Juan Vendedor', 'pmba098@outlook.es', '$2y$10$MQmSDI.W6aqsnhMgrwSZOudHMekCDFKORWDsh6B4.lHbEWA72KPLS', 'si');
+
+INSERT INTO asignacionRol (usuario_id, rol_id) VALUES (1, 1), (2, 2);

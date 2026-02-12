@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+// Verificar autenticación
+if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
+    header('Location: ../index.php');
+    exit();
+}
+
+// Verificar que sea administrador
+if (!$_SESSION['es_superadmin'] && !in_array('Administrador', $_SESSION['roles'] ?? [])) {
+    header('Location: ../empresa/dashboard.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,11 +30,9 @@
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../recursos/css/all.css">
-    
-    <!-- CSS Personalizado -->
-    <link rel="stylesheet" href="./recursos/css/dashboard.css">
-</head>
-<body>
+<!-- SweetAlert2 CSS --> <link rel="stylesheet" href="./recursos/enlaces/sweetalert2.css"> 
+ <!-- CSS Personalizado --> 
+  <link rel="stylesheet" href="./recursos/css/dashboard.css"> </head> <body>
     <!-- Sidebar Moderno -->
    <?php include "./componentes/aside.php" ?>
 
@@ -28,6 +41,22 @@
 
     <!-- Main Content -->
     <main class="main-content">
+        <!-- Mensaje de Éxito (Autenticación Completa) -->
+        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin: 20px; border-radius: 12px; border-left: 4px solid #10b981; background: #d1fae5; color: #065f46;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="font-size: 32px;">✅</div>
+                <div style="flex: 1;">
+                    <h5 style="margin: 0 0 5px 0; color: #065f46; font-weight: 600;">
+                        ¡Bienvenido, <span id="usuario-nombre">Cargando...</span>!
+                    </h5>
+                    <p style="margin: 0; font-size: 14px;">
+                        Autenticación 2FA completada exitosamente. Accediste al panel de <strong>Administrador</strong>
+                    </p>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
         <!-- Topbar -->
         <div class="topbar">
             <div class="topbar-left">
@@ -46,77 +75,52 @@
             </div>
 
             <div class="topbar-right">
-                <!-- Notifications -->
-                <div class="notification-wrapper">
-                    <button class="btn btn-icon btn-notification position-relative">
+                <!-- Notifications Dropdown -->
+                <div class="dropdown notification-wrapper">
+                    <button class="btn btn-icon btn-notification position-relative" type="button" id="dropdownNotifications" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                         <i class="fas fa-bell"></i>
-                        <span class="notification-badge">3</span>
+                        <span class="notification-badge" id="notification-count" style="display: none;">0</span>
                     </button>
-                    <div class="notification-menu">
-                        <div class="notification-header">
-                            <h6 class="m-0">Notificaciones</h6>
-                            <button class="btn btn-sm btn-ghost">Limpiar</button>
-                        </div>
-                        <div class="notification-list">
-                            <div class="notification-item unread">
-                                <div class="notification-icon danger">
-                                    <i class="fas fa-circle-exclamation"></i>
-                                </div>
-                                <div class="notification-content">
-                                    <p class="mb-1"><strong>Validación Pendiente</strong></p>
-                                    <span>5 empresas esperando validación</span>
-                                    <small>Hace 5 min</small>
-                                </div>
-                            </div>
-                            <div class="notification-item unread">
-                                <div class="notification-icon warning">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                </div>
-                                <div class="notification-content">
-                                    <p class="mb-1"><strong>Alerta del Sistema</strong></p>
-                                    <span>Uso de memoria al 78%</span>
-                                    <small>Hace 15 min</small>
-                                </div>
-                            </div>
-                            <div class="notification-item">
-                                <div class="notification-icon info">
-                                    <i class="fas fa-info-circle"></i>
-                                </div>
-                                <div class="notification-content">
-                                    <p class="mb-1"><strong>Respaldo Completado</strong></p>
-                                    <span>Base de datos respaldada exitosamente</span>
-                                    <small>Hace 2h</small>
-                                </div>
+                    <div class="dropdown-menu dropdown-menu-end notification-menu" aria-labelledby="dropdownNotifications" style="width: 380px; max-height: 500px; overflow-y: auto;">
+                        <div class="notification-header px-3 py-2 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0">Notificaciones</h6>
+                                <button class="btn btn-sm btn-link text-muted p-0">Marcar todas como leídas</button>
                             </div>
                         </div>
-                        <div class="notification-footer">
-                            <a href="#">Ver todas →</a>
+                        <div class="notification-list" id="notification-list">
+                            <div class="text-center py-4">
+                                <i class="fas fa-bell-slash fa-2x text-muted mb-2"></i>
+                                <p class="text-muted mb-0">No hay notificaciones</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Settings -->
-                <button class="btn btn-icon">
+                <!-- Settings Button -->
+                <a href="configuracion.php" class="btn btn-icon" title="Configuración">
                     <i class="fas fa-gear"></i>
-                </button>
+                </a>
 
-                <!-- User Menu -->
-                <div class="user-menu-wrapper">
-                    <button class="btn btn-user">
-                        <img src="https://ui-avatars.com/api/?name=Admin+System&background=2563eb&color=fff&rounded=true" alt="Admin">
-                        <span class="d-none d-md-inline">Admin</span>
-                        <i class="fas fa-chevron-down"></i>
+                <!-- User Menu Dropdown -->
+                <div class="dropdown user-menu-wrapper">
+                    <button class="btn btn-user" type="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://ui-avatars.com/api/?name=Usuario&background=2563eb&color=fff&rounded=true" alt="Usuario" id="user-avatar">
+                        <span class="d-none d-md-inline" id="user-name-topbar">Cargando...</span>
+                        <i class="fas fa-chevron-down ms-1"></i>
                     </button>
-                    <div class="user-menu">
-                        <a href="#" class="menu-link">
-                            <i class="fas fa-user"></i> Mi Perfil
+                    <div class="dropdown-menu dropdown-menu-end user-menu" aria-labelledby="dropdownUser" style="min-width: 250px;">
+                        <div class="px-3 py-2 border-bottom">
+                            <p class="mb-0 fw-bold" id="user-name-dropdown">Usuario</p>
+                            <small class="text-muted" id="user-email-dropdown">email@ejemplo.com</small>
+                        </div>
+                        <a href="perfil.php" class="dropdown-item menu-link py-2">
+                            <i class="fas fa-user me-2"></i> Mi Perfil
                         </a>
-                        <a href="#" class="menu-link">
-                            <i class="fas fa-key"></i> Cambiar Contraseña
-                        </a>
-                        <hr class="my-2">
-                        <a href="#" class="menu-link text-danger" onclick="logout(event)">
-                            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                        
+                        <div class="dropdown-divider"></div>
+                        <a href="./cerrarSession.php" class="dropdown-item menu-link text-danger py-2" >
+                            <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
                         </a>
                     </div>
                 </div>
@@ -158,7 +162,9 @@
                             </div>
                             <div class="kpi-body">
                                 <h6 class="kpi-label">Empresas Registradas</h6>
-                                <h3 class="kpi-value">47</h3>
+                                <h3 class="kpi-value" id="kpi-empresas-total">
+                                    <span class="spinner-border spinner-border-sm" role="status"></span>
+                                </h3>
                                 <p class="kpi-footer">
                                     <a href="empresas.php" style="text-decoration: none; color: #2563eb;">Ver todas →</a>
                                 </p>
@@ -173,16 +179,16 @@
                                 <div class="kpi-icon-wrapper" style="--color: #f59e0b;">
                                     <i class="fas fa-hourglass"></i>
                                 </div>
-                                <?php if ($stats['empresas_pendientes'] > 0): ?>
-                                <div class="kpi-change danger">
+                                <div class="kpi-change danger" id="kpi-pendientes-badge" style="display: none;">
                                     <i class="fas fa-arrow-up"></i>
-                                    <span><?= $stats['empresas_pendientes'] ?></span>
+                                    <span id="kpi-pendientes-badge-value">0</span>
                                 </div>
-                                <?php endif; ?>
                             </div>
                             <div class="kpi-body">
                                 <h6 class="kpi-label">Pendientes de Validación</h6>
-                                <h3 class="kpi-value">5</h3>
+                                <h3 class="kpi-value" id="kpi-empresas-pendientes">
+                                    <span class="spinner-border spinner-border-sm" role="status"></span>
+                                </h3>
                                 <p class="kpi-footer">
                                     <a href="validacion-empresas.php" style="text-decoration: none; color: #f59e0b;">Validar ahora →</a>
                                 </p>
@@ -199,12 +205,14 @@
                                 </div>
                                 <div class="kpi-status online">
                                     <span class="status-dot"></span>
-                                    <span><?= $stats['admin_activos'] ?></span>
+                                    <span id="kpi-admin-activos-badge">0</span>
                                 </div>
                             </div>
                             <div class="kpi-body">
                                 <h6 class="kpi-label">Administradores Activos</h6>
-                                <h3 class="kpi-value">3</h3>
+                                <h3 class="kpi-value" id="kpi-admin-activos">
+                                    <span class="spinner-border spinner-border-sm" role="status"></span>
+                                </h3>
                                 <p class="kpi-footer">
                                     <a href="usuarios.php" style="text-decoration: none; color: #10b981;">Gestionar →</a>
                                 </p>
@@ -221,12 +229,14 @@
                                 </div>
                                 <div class="kpi-status online">
                                     <span class="status-dot"></span>
-                                    <span>100%</span>
+                                    <span id="kpi-sistema-porcentaje">0%</span>
                                 </div>
                             </div>
                             <div class="kpi-body">
                                 <h6 class="kpi-label">Estado del Sistema</h6>
-                                <h3 class="kpi-value">Óptimo</h3>
+                                <h3 class="kpi-value" id="kpi-sistema-estado">
+                                    <span class="spinner-border spinner-border-sm" role="status"></span>
+                                </h3>
                                 <p class="kpi-footer">
                                     <a href="salud-sistema.php" style="text-decoration: none; color: #8b5cf6;">Detalles →</a>
                                 </p>
@@ -262,23 +272,10 @@
                     <!-- Actividad Reciente por Empresa -->
                     <div class="col-12 col-lg-4" data-animate="slide-in">
                         <div class="card-modern">
-                            <div class="card-header-modern">
-                                <div>
-                                    <h5 class="card-title">Resumen de Estados</h5>
-                                    <p class="card-subtitle">Distribución actual</p>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="metric-item">
-                                    <div class="metric-label">Activa</div>
-                                    <div class="metric-value">
-                                        <span class="badge badge-primary">38 (80.85%)</span>
-                                    </div>
-                                </div>
-                                <div class="metric-item">
-                                    <div class="metric-label">Pendiente</div>
-                                    <div class="metric-value">
-                                        <span class="badge badge-primary">5 (10.64%)</span>
+                            <div class="card-heade id="estados-resumen">
+                                <div class="text-center py-4">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Cargando...)</span>
                                     </div>
                                 </div>
                                 <div class="metric-item">
@@ -356,28 +353,9 @@
                                         <div class="activity-content">
                                             <p class="activity-title">Solicitud Pendiente</p>
                                             <p class="activity-description">LocalShop - Esperando validación de documentos</p>
-                                            <span class="activity-time">Hace 4 horas</span>
-                                        </div>
-                                    </div>
-                                    <div class="activity-item">
-                                        <div class="activity-marker info"></div>
-                                        <div class="activity-content">
-                                            <p class="activity-title">Acceso Administrativo</p>
-                                            <p class="activity-description">Admin inició sesión en el sistema</p>
-                                            <span class="activity-time">Hace 6 horas</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Empresas Registradas Table -->
-            <section class="table-section" data-animate="slide-in">
-                <div class="card-modern">
-                    <div class="card-header-modern">
+                                            <spatext-center py-4">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Cargando actividad...
                         <div>
                             <h5 class="card-title">Empresas Registradas</h5>
                             <p class="card-subtitle">Listado de todas las empresas en el sistema</p>
@@ -405,73 +383,12 @@
                                     <td>
                                         <strong>TechStore</strong>
                                     </td>
-                                    <td>
-                                        <span class="badge badge-light">Electrónica</span>
-                                    </td>
-                                    <td>ES12345678X</td>
-                                    <td>
-                                        <small>contact@techstore.com</small>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-success">Activa</span>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="empresas.php" class="btn btn-sm btn-primary" title="Ver">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr class="table-row-hover">
-                                    <td>
-                                        <img src="https://via.placeholder.com/50x50?text=SM" alt="Logo" style="width: 50px; height: 50px; border-radius: 4px; object-fit: contain;">
-                                    </td>
-                                    <td>
-                                        <strong>StarMart</strong>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-light">Retail</span>
-                                    </td>
-                                    <td>ES87654321Y</td>
-                                    <td>
-                                        <small>info@starmart.com</small>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-success">Activa</span>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="empresas.php" class="btn btn-sm btn-primary" title="Ver">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr class="table-row-hover">
-                                    <td>
-                                        <img src="https://via.placeholder.com/50x50?text=LS" alt="Logo" style="width: 50px; height: 50px; border-radius: 4px; object-fit: contain;">
-                                    </td>
-                                    <td>
-                                        <strong>LocalShop S.L.</strong>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-light">Comercio</span>
-                                    </td>
-                                    <td>B12345678</td>
-                                    <td>
-                                        <small>info@localshop.es</small>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-warning">Pendiente</span>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="empresas.php" class="btn btn-sm btn-primary" title="Ver">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
+                                   >
+                                    <td colspan="7" class="text-center py-4">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Cargando empresas...</span>
+                                        </div>
+                                        <p class="mt-2 text-muted">Cargando listado de empresas...</p
 
             <!-- Footer -->
             <footer class="app-footer">
@@ -483,16 +400,13 @@
     <!-- Bootstrap JS -->
     <script src="../recursos/js/bootstrap.bundle.min.js"></script>
     
+    <!-- SweetAlert2 JS -->
+    <script src="../recursos/js/sweetalert2.all.js"></script>
+    
     <!-- Chart.js -->
     <script src="../recursos/js/chart.umd.js"></script>
     
     <!-- Dashboard JS -->
     <script src="./recursos/js/dashboard.js"></script>
-    
-    <script>
-        function actualizarDashboard() {
-            location.reload();
-        }
-    </script>
 </body>
 </html>

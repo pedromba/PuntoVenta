@@ -117,17 +117,39 @@ function getOperatingSystem() {
 function detectErrorCode() {
     const urlParams = new URLSearchParams(window.location.search);
     const errorCode = urlParams.get('code') || '500';
-    const errorStatus = urlParams.get('status') || 'Error Interno del Servidor';
+    const errorStatus = urlParams.get('status') || null;
+    const customMessage = urlParams.get('msg') || null;
+    const debugInfo = urlParams.get('debug') || null;
 
     const errorCodeElement = document.getElementById('error-code');
     const errorStatusElement = document.getElementById('error-status');
+    const errorDescriptionElement = document.querySelector('.error-description');
 
     if (errorCodeElement) {
         errorCodeElement.textContent = errorCode;
     }
 
     if (errorStatusElement) {
-        errorStatusElement.textContent = getErrorMessage(errorCode, errorStatus);
+        errorStatusElement.textContent = errorStatus || getErrorMessage(errorCode);
+    }
+
+    // Mostrar mensaje personalizado si existe
+    if (customMessage && errorDescriptionElement) {
+        errorDescriptionElement.textContent = decodeURIComponent(customMessage);
+    }
+
+    // Mostrar información de debug si existe
+    if (debugInfo) {
+        const detailsContent = document.querySelector('.details-content');
+        if (detailsContent) {
+            const debugRow = document.createElement('div');
+            debugRow.className = 'detail-row';
+            debugRow.innerHTML = `
+                <span class="detail-label">Debug:</span>
+                <span class="detail-value" style="color: #dc2626; font-family: monospace; font-size: 0.875rem;">${decodeURIComponent(debugInfo)}</span>
+            `;
+            detailsContent.appendChild(debugRow);
+        }
     }
 
     // Actualizar favicon y título
@@ -137,7 +159,7 @@ function detectErrorCode() {
 /**
  * Obtener mensaje de error según el código
  */
-function getErrorMessage(code, defaultMessage) {
+function getErrorMessage(code, defaultMessage = 'Error Interno del Servidor') {
     const errorMessages = {
         '400': 'Solicitud Inválida',
         '401': 'No Autorizado',

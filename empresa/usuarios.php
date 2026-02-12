@@ -155,7 +155,9 @@
                 </td>
                 <td>juan.perez@empresa.com</td>
                 <td>
-                  <span class="badge bg-primary">Administrador</span>
+                  <div class="roles-badges">
+                    <span class="badge bg-primary">Administrador</span>
+                  </div>
                 </td>
                 <td>
                   <span class="status-badge status-activo">
@@ -183,7 +185,10 @@
                 </td>
                 <td>maria.garcia@empresa.com</td>
                 <td>
-                  <span class="badge bg-success">Vendedor</span>
+                  <div class="roles-badges">
+                    <span class="badge bg-success">Vendedor</span>
+                    <span class="badge bg-info">Almacén</span>
+                  </div>
                 </td>
                 <td>
                   <span class="status-badge status-activo">
@@ -211,7 +216,9 @@
                 </td>
                 <td>carlos.lopez@empresa.com</td>
                 <td>
-                  <span class="badge bg-warning">Almacén</span>
+                  <div class="roles-badges">
+                    <span class="badge bg-warning">Almacén</span>
+                  </div>
                 </td>
                 <td>
                   <span class="status-badge status-inactivo">
@@ -239,7 +246,10 @@
                 </td>
                 <td>ana.martinez@empresa.com</td>
                 <td>
-                  <span class="badge bg-info">Finanzas</span>
+                  <div class="roles-badges">
+                    <span class="badge bg-info">Finanzas</span>
+                    <span class="badge bg-success">Vendedor</span>
+                  </div>
                 </td>
                 <td>
                   <span class="status-badge status-activo">
@@ -283,17 +293,18 @@
                   <div class="invalid-feedback">Ingresa un email válido</div>
                 </div>
 
-                <!-- Rol -->
+                <!-- Roles (Selección Múltiple) -->
                 <div class="mb-3">
-                  <label class="form-label">Rol <span class="text-danger">*</span></label>
-                  <select class="form-select" name="rol" required>
-                    <option value="">Selecciona un rol</option>
-                    <option value="admin">Administrador</option>
-                    <option value="finanzas">Finanzas</option>
-                    <option value="almacen">Almacén</option>
-                    <option value="vendedor">Vendedor</option>
-                  </select>
-                  <div class="invalid-feedback">Selecciona un rol</div>
+                  <label class="form-label">Roles <span class="text-danger">*</span></label>
+                  <div class="roles-selection" id="rolesSelection">
+                    <!-- Los roles se cargarán dinámicamente desde la base de datos -->
+                    <div class="alert alert-info small">
+                      <i class="fas fa-info-circle me-1"></i>
+                      Puedes asignar múltiples roles al usuario
+                    </div>
+                  </div>
+                  <input type="hidden" name="roles" id="rolesInput" required>
+                  <div class="invalid-feedback">Debes seleccionar al menos un rol</div>
                 </div>
 
                 <!-- Estado -->
